@@ -1,7 +1,8 @@
 <img alt="AutoMatric logo" src="https://raw.githubusercontent.com/pi-etro/AutoMatric/master/logos/lg_matric_gray.png" width="350">
-<br>
+
 <img align="right" src="https://img.shields.io/badge/License-GPLv3-blue.svg"><img align="right" src="https://img.shields.io/badge/Made%20with-Java-1f425f.svg">
-<br>
+
+
 AutoMatric is a project to automate the process of subject enrollment of the UFABC students.
 
 ## Usage
