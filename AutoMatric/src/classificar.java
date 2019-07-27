@@ -6,12 +6,21 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 
 public class classificar extends JDialog {
 
     private final JPanel contentPanel = new JPanel();
+ 
+    private JTextField textField;
+    private JTextField txtStatus;
+  
+
 
     /**
      * Launch the application.
@@ -41,6 +50,28 @@ public class classificar extends JDialog {
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("Salvar Arquivos em");
+        lblNewLabel.setBounds(40, 30, 290, 14);
+        contentPanel.add(lblNewLabel);
+        
+        JButton btnNewButton = new JButton("...");
+        btnNewButton.setBounds(330, 50, 30, 25);
+        contentPanel.add(btnNewButton);
+        
+        textField = new JTextField();
+        textField.setBounds(40, 50, 290, 25);
+        contentPanel.add(textField);
+        textField.setColumns(10);
+        
+        txtStatus = new JTextField();
+        txtStatus.setHorizontalAlignment(SwingConstants.CENTER);
+        txtStatus.setText("Status...");
+        txtStatus.setToolTipText("");
+        txtStatus.setBounds(40, 113, 410, 117);
+        contentPanel.add(txtStatus);
+        txtStatus.setColumns(10);
+        
         {
             JPanel buttonPane = new JPanel();
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -65,5 +96,4 @@ public class classificar extends JDialog {
         }
         setLocationRelativeTo(null);
     }
-
 }

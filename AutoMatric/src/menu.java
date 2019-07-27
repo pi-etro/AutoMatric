@@ -46,20 +46,41 @@ public class menu extends JFrame {
                 contentPane.setVisible(false);
                 selArch sel = new selArch();
                 sel.setVisible(true);
-            }
+            }    
         });
         btnClassificar.setBounds(280, 117, 153, 26);
         contentPane.add(btnClassificar);
         
         JButton button = new JButton("Classificar");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                contentPane.setVisible(false);
+                classificar sel = new classificar();
+                sel.setVisible(true);
+            }    
+        });
         button.setBounds(280, 67, 153, 26);
         contentPane.add(button);
         
         JButton button_1 = new JButton("Adicionar Aluno");
+        button_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                contentPane.setVisible(false);
+                addAluno sel = new addAluno();
+                sel.setVisible(true);
+            }    
+        });
         button_1.setBounds(280, 167, 153, 26);
         contentPane.add(button_1);
         
         JButton button_2 = new JButton("Adicionar Matéria");
+        button_2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                contentPane.setVisible(false);
+                addMateria sel = new addMateria();
+                sel.setVisible(true);
+            }    
+        });
         button_2.setBounds(280, 217, 153, 26);
         contentPane.add(button_2);
         
