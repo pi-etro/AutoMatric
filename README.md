@@ -1,8 +1,8 @@
-# AutoMatric
+# <img alt="AutoMatric logo" src="https://raw.githubusercontent.com/pi-etro/AutoMatric/master/logos/lg_matric_gray.png" width="325">
 
 [![made-with-java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://www.java.com) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
-
+AutoMatric is a project to automate the UFABC students subject enrollment process.
 
 ## Usage
 
