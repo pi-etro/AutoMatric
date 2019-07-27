@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class selArch extends JDialog {
 
@@ -97,6 +99,12 @@ public class selArch extends JDialog {
             }
             {
                 JButton cancelButton = new JButton("Cancel");
+                cancelButton.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent arg0) {
+                        //fechar janela Marina v1
+                        System.exit(0);
+                	}
+                });
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
             }

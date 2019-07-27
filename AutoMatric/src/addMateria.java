@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class addMateria extends JDialog {
 
@@ -53,6 +55,12 @@ public class addMateria extends JDialog {
             }
             {
                 JButton cancelButton = new JButton("Cancel");
+                cancelButton.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                        //fechar janela Marina v1
+                        System.exit(0);
+                	}
+                });
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
             }
