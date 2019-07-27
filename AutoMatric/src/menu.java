@@ -22,9 +22,10 @@ public class menu extends JFrame {
     private JPanel contentPane;
 
     public menu() {
+        setResizable(false);
         setBackground(Color.DARK_GRAY);
         setTitle("AutoMatric");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 500, 350);
         contentPane = new JPanel();
         contentPane.setBackground(Color.LIGHT_GRAY);
@@ -42,6 +43,9 @@ public class menu extends JFrame {
         JButton btnClassificar = new JButton("Selecionar Arquivos");
         btnClassificar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                contentPane.setVisible(false);
+                selArch sel = new selArch();
+                sel.setVisible(true);
             }
         });
         btnClassificar.setBounds(280, 117, 153, 26);

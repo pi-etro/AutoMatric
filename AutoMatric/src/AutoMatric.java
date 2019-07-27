@@ -48,6 +48,7 @@ public class AutoMatric {
      */
     private void initialize() {
         frmAutomatric = new JFrame();
+        frmAutomatric.setResizable(false);
         frmAutomatric.getContentPane().setBackground(Color.GRAY);
         frmAutomatric.getContentPane().setLayout(null);
         
@@ -68,10 +69,9 @@ public class AutoMatric {
         btnIni.setBounds(200, 220, 100, 30);
         frmAutomatric.getContentPane().add(btnIni);
         frmAutomatric.setTitle("AutoMatric");
-        frmAutomatric.setResizable(false);
         frmAutomatric.setBackground(Color.DARK_GRAY);
         frmAutomatric.setBounds(100, 100, 500, 350);
-        frmAutomatric.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frmAutomatric.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         try {
         frmAutomatric.setIconImage(ImageIO.read(new File("img/icon.png")));
