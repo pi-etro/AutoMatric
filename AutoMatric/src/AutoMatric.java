@@ -23,6 +23,7 @@ public class AutoMatric {
     /**
      * Launch the application.
      */
+    //teste
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
