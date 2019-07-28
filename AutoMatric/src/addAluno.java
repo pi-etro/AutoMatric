@@ -24,9 +24,9 @@ import java.awt.event.ActionEvent;
 public class addAluno extends JDialog {
 
     private final JPanel contentPanel = new JPanel();
-    private JTextField txtDigiteAqui;
-    private JTextField txtDigiteAqui_1;
-    private JTextField textField;
+    private JTextField txtRA;
+    private JTextField txtCR;
+    private JTextField txtCA;
 
     /**
      * Launch the application.
@@ -66,21 +66,21 @@ public class addAluno extends JDialog {
         lblRa.setBounds(25, 41, 56, 16);
         contentPanel.add(lblRa);
         
-        txtDigiteAqui = new JTextField();
-        txtDigiteAqui.setText("Digite aqui...");
-        txtDigiteAqui.setBounds(48, 38, 116, 22);
-        contentPanel.add(txtDigiteAqui);
-        txtDigiteAqui.setColumns(10);
+        txtRA = new JTextField();
+        txtRA.setText("Digite aqui...");
+        txtRA.setBounds(48, 38, 116, 22);
+        contentPanel.add(txtRA);
+        txtRA.setColumns(10);
         
         JLabel lblCr = new JLabel("CR ");
         lblCr.setBounds(25, 70, 56, 16);
         contentPanel.add(lblCr);
         
-        txtDigiteAqui_1 = new JTextField();
-        txtDigiteAqui_1.setText("Digite aqui...");
-        txtDigiteAqui_1.setBounds(48, 67, 116, 22);
-        contentPanel.add(txtDigiteAqui_1);
-        txtDigiteAqui_1.setColumns(10);
+        txtCR = new JTextField();
+        txtCR.setText("Digite aqui...");
+        txtCR.setBounds(48, 67, 116, 22);
+        contentPanel.add(txtCR);
+        txtCR.setColumns(10);
         
         JLabel lblTurno = new JLabel("Turno");
         lblTurno.setBounds(236, 41, 56, 16);
@@ -92,11 +92,11 @@ public class addAluno extends JDialog {
         comboBox.setBounds(285, 38, 116, 22);
         contentPanel.add(comboBox);
         
-        textField = new JTextField();
-        textField.setText("Digite aqui...");
-        textField.setColumns(10);
-        textField.setBounds(48, 99, 116, 22);
-        contentPanel.add(textField);
+        txtCA = new JTextField();
+        txtCA.setText("Digite aqui...");
+        txtCA.setColumns(10);
+        txtCA.setBounds(48, 99, 116, 22);
+        contentPanel.add(txtCA);
         
         JLabel lblCa = new JLabel("CA");
         lblCa.setBounds(25, 102, 56, 16);

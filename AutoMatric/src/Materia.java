@@ -1,4 +1,5 @@
 
-public class Materia {
-
+public interface Materia {
+	String codigoDisciplina="";
+	String nomeDisciplina="";
 }

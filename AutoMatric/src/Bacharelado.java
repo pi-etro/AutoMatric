@@ -1,26 +1,11 @@
 
-public class Bacharelado {
+public abstract class Bacharelado implements Materia {
 	private String BI, posBI;
-	private String obrigatoriasBI[] = new String[20];
-	private String obrigatoriasposBI[] = new String[20];
-	private String limitadasBI[] = new String[20];
-	private String limitadasposBI[] = new String[20];
-	private String livreBI[] = new String[20];
-	private String livreposBI[] = new String[20];
-	
-	protected String curso (String bacharelado)
-	{
-		if(bacharelado == BI)
-		{
-			//desenvolver métodos
-			return BI;
-		}
-		else 
-		{
-			//desenvolver métodos
-			return posBI;
-		}
-	}
+	private String obrigatorias[] = new String[20];
+	private String limitadas[] = new String[20];
+	private String livrepos[] = new String[20];
+
+	//receber dados do banco de dados, talvez a classe não seja abstrata
 	
 
 }
