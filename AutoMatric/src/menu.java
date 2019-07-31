@@ -1,15 +1,10 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
 import java.awt.Image;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,9 +13,9 @@ import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class menu extends JFrame {
-
+    private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-
+    
     public menu() {
         setResizable(false);
         setBackground(Color.DARK_GRAY);
@@ -33,62 +28,64 @@ public class menu extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        Image logo2 = new ImageIcon(this.getClass().getResource("/lg.png")).getImage();
-        lblNewLabel.setBounds(40, 68, 175, 175);
-        lblNewLabel.setIcon(new ImageIcon(logo2));
-        contentPane.add(lblNewLabel);
+        JLabel logoLabel = new JLabel("");
+        logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        Image logo = new ImageIcon(this.getClass().getResource("/lg.png")).getImage();
+        logoLabel.setBounds(40, 68, 175, 175);
+        logoLabel.setIcon(new ImageIcon(logo));
+        contentPane.add(logoLabel);
         
-        JButton btnClassificar = new JButton("Selecionar Arquivos");
-        btnClassificar.addActionListener(new ActionListener() {
+        // Classificar
+        JButton btnClas = new JButton("Classificar");
+        btnClas.setBounds(280, 67, 153, 26);
+        contentPane.add(btnClas);
+        btnClas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                contentPane.setVisible(false);
-                selArch sel = new selArch();
-                sel.setVisible(true);
+                new classificar().setVisible(true);
+                dispose();
             }    
         });
-        btnClassificar.setBounds(280, 117, 153, 26);
-        contentPane.add(btnClassificar);
         
-        JButton button = new JButton("Classificar");
-        button.addActionListener(new ActionListener() {
+        // Selecionar Arquivos 
+        JButton btnFiles = new JButton("Selecionar Arquivos");
+        btnFiles.setBounds(280, 117, 153, 26);
+        contentPane.add(btnFiles);
+        btnFiles.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                contentPane.setVisible(false);
-                classificar sel = new classificar();
-                sel.setVisible(true);
+                new selArch().setVisible(true);
+                dispose();
             }    
         });
-        button.setBounds(280, 67, 153, 26);
-        contentPane.add(button);
         
-        JButton button_1 = new JButton("Adicionar Aluno");
-        button_1.addActionListener(new ActionListener() {
+        // Adicionar Aluno
+        JButton btnStud = new JButton("Adicionar Aluno");
+        btnStud.setBounds(280, 167, 153, 26);
+        contentPane.add(btnStud);
+        btnStud.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                contentPane.setVisible(false);
-                addAluno sel = new addAluno();
-                sel.setVisible(true);
+                new addAluno().setVisible(true);
+                dispose();
             }    
         });
-        button_1.setBounds(280, 167, 153, 26);
-        contentPane.add(button_1);
         
-        JButton button_2 = new JButton("Adicionar Matéria");
-        button_2.addActionListener(new ActionListener() {
+        // Adicionar Materia
+        JButton btnSub = new JButton("Adicionar Matéria");
+        btnSub.setBounds(280, 217, 153, 26);
+        contentPane.add(btnSub);
+        btnSub.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                contentPane.setVisible(false);
-                addMateria sel = new addMateria();
-                sel.setVisible(true);
+                new addMateria().setVisible(true);
+                dispose();
             }    
         });
-        button_2.setBounds(280, 217, 153, 26);
-        contentPane.add(button_2);
         
+        //icone do programa
         try {
             super.setIconImage(ImageIO.read(new File("img/icon.png")));
         } catch (Exception e) {
                 e.printStackTrace();
         }
+        //centralizar
         setLocationRelativeTo(null);
     }
 }

@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,28 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class selArch extends JDialog {
-
+    private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
+    private JTextField alunoFile;
+    private JTextField materiasFile;
+    private JTextField matriculaFile;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        try {
-            selArch dialog = new selArch();
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Create the dialog.
-     */
     public selArch() {
         setTitle("Selecionar Arquivos");
         setResizable(false);
@@ -49,50 +32,61 @@ public class selArch extends JDialog {
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
         
-        JLabel lblNewLabel = new JLabel("Banco de Alunos");
-        lblNewLabel.setBounds(40, 30, 290, 14);
-        contentPanel.add(lblNewLabel);
+        JLabel studLabel = new JLabel("Banco de Alunos");
+        studLabel.setBounds(40, 30, 290, 14);
+        contentPanel.add(studLabel);
         
-        JLabel lblNewLabel_1 = new JLabel("Banco de Matérias");
-        lblNewLabel_1.setBounds(40, 90, 290, 14);
-        contentPanel.add(lblNewLabel_1);
+        JLabel subLabel = new JLabel("Banco de Matérias");
+        subLabel.setBounds(40, 90, 290, 14);
+        contentPanel.add(subLabel);
         
-        JLabel lblNewLabel_2 = new JLabel("Banco de Matrículas");
-        lblNewLabel_2.setBounds(40, 150, 290, 14);
-        contentPanel.add(lblNewLabel_2);
+        JLabel matrLabel = new JLabel("Banco de Matrículas");
+        matrLabel.setBounds(40, 150, 290, 14);
+        contentPanel.add(matrLabel);
         
-        JButton btnNewButton = new JButton("...");
-        btnNewButton.setBounds(330, 50, 30, 25);
-        contentPanel.add(btnNewButton);
+        JButton btnStud = new JButton("...");
+        btnStud.setBounds(330, 50, 30, 25);
+        contentPanel.add(btnStud);
         
-        JButton btnNewButton_1 = new JButton("...");
-        btnNewButton_1.setBounds(330, 110, 30, 25);
-        contentPanel.add(btnNewButton_1);
+        JButton btnSub = new JButton("...");
+        btnSub.setBounds(330, 110, 30, 25);
+        contentPanel.add(btnSub);
         
-        JButton btnNewButton_2 = new JButton("...");
-        btnNewButton_2.setBounds(330, 170, 30, 25);
-        contentPanel.add(btnNewButton_2);
+        JButton btnMatr = new JButton("...");
+        btnMatr.setBounds(330, 170, 30, 25);
+        contentPanel.add(btnMatr);
         
-        textField = new JTextField();
-        textField.setBounds(40, 50, 290, 25);
-        contentPanel.add(textField);
-        textField.setColumns(10);
+        alunoFile = new JTextField();
+        alunoFile.setBounds(40, 50, 290, 25);
+        contentPanel.add(alunoFile);
+        alunoFile.setColumns(10);
         
-        textField_1 = new JTextField();
-        textField_1.setBounds(40, 110, 290, 25);
-        contentPanel.add(textField_1);
-        textField_1.setColumns(10);
+        materiasFile = new JTextField();
+        materiasFile.setBounds(40, 110, 290, 25);
+        contentPanel.add(materiasFile);
+        materiasFile.setColumns(10);
         
-        textField_2 = new JTextField();
-        textField_2.setBounds(40, 170, 290, 25);
-        contentPanel.add(textField_2);
-        textField_2.setColumns(10);
+        matriculaFile = new JTextField();
+        matriculaFile.setBounds(40, 170, 290, 25);
+        contentPanel.add(matriculaFile);
+        matriculaFile.setColumns(10);
+        
+        // OK Cancel
         {
             JPanel buttonPane = new JPanel();
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
             getContentPane().add(buttonPane, BorderLayout.SOUTH);
             {
                 JButton okButton = new JButton("OK");
+                okButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        
+                        // passar dados ao menu !
+                        
+                        new menu().setVisible(true);
+                        dispose();
+                    }
+                });
                 okButton.setActionCommand("OK");
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
@@ -101,8 +95,8 @@ public class selArch extends JDialog {
                 JButton cancelButton = new JButton("Cancel");
                 cancelButton.addActionListener(new ActionListener() {
                 	public void actionPerformed(ActionEvent arg0) {
-                        //fechar janela Marina v1
-                        System.exit(0);
+                	    new menu().setVisible(true);
+                	    dispose();
                 	}
                 });
                 cancelButton.setActionCommand("Cancel");
@@ -110,11 +104,13 @@ public class selArch extends JDialog {
             }
         }
         
+        //icone do programa
         try {
             super.setIconImage(ImageIO.read(new File("img/icon.png")));
         } catch (Exception e) {
                 e.printStackTrace();
         }
+        //centralizar
         setLocationRelativeTo(null);
     }
 }

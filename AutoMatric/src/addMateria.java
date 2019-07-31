@@ -2,7 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,27 +15,11 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
 public class addMateria extends JDialog {
-
+    private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
-    private JTextField txtDigiteAqui;
-    private JTextField textField;
+    private JTextField codigo;
+    private JTextField nome;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        try {
-            addMateria dialog = new addMateria();
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Create the dialog.
-     */
     public addMateria() {
         setTitle("Adicionar matéria");
         setResizable(false);
@@ -50,87 +33,98 @@ public class addMateria extends JDialog {
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
         
-        JLabel lblMatria = new JLabel("Mat\u00E9ria");
-        lblMatria.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblMatria.setBounds(12, 13, 56, 16);
-        contentPanel.add(lblMatria);
+        JLabel materiaLabel = new JLabel("Mat\u00E9ria");
+        materiaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+        materiaLabel.setBounds(12, 13, 56, 16);
+        contentPanel.add(materiaLabel);
         
-        JLabel lblCdigo = new JLabel("C\u00F3digo ");
-        lblCdigo.setBounds(12, 42, 56, 16);
-        contentPanel.add(lblCdigo);
+        JLabel codLabel = new JLabel("C\u00F3digo ");
+        codLabel.setBounds(12, 42, 56, 16);
+        contentPanel.add(codLabel);
         
-        txtDigiteAqui = new JTextField();
-        txtDigiteAqui.setText("Digite aqui...");
-        txtDigiteAqui.setBounds(80, 39, 80, 22);
-        contentPanel.add(txtDigiteAqui);
-        txtDigiteAqui.setColumns(10);
+        codigo = new JTextField();
+        codigo.setText("Digite aqui...");
+        codigo.setBounds(80, 39, 80, 22);
+        contentPanel.add(codigo);
+        codigo.setColumns(10);
         
-        JLabel lblNome = new JLabel("Nome");
-        lblNome.setBounds(12, 74, 56, 16);
-        contentPanel.add(lblNome);
+        JLabel nomeLabel = new JLabel("Nome");
+        nomeLabel.setBounds(12, 74, 56, 16);
+        contentPanel.add(nomeLabel);
         
-        textField = new JTextField();
-        textField.setText("Digite aqui...");
-        textField.setColumns(10);
-        textField.setBounds(80, 71, 326, 22);
-        contentPanel.add(textField);
+        nome = new JTextField();
+        nome.setText("Digite aqui...");
+        nome.setColumns(10);
+        nome.setBounds(80, 71, 326, 22);
+        contentPanel.add(nome);
         
-        JLabel lblObrigatriaPara = new JLabel("Obrigat\u00F3ria para");
-        lblObrigatriaPara.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblObrigatriaPara.setBounds(12, 115, 134, 16);
-        contentPanel.add(lblObrigatriaPara);
+        JLabel obrigLabel = new JLabel("Obrigat\u00F3ria para");
+        obrigLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+        obrigLabel.setBounds(12, 115, 134, 16);
+        contentPanel.add(obrigLabel);
         
-        JCheckBox chckbxBct = new JCheckBox("BCT");
-        chckbxBct.setBounds(134, 111, 56, 25);
-        contentPanel.add(chckbxBct);
+        JLabel limitLabel = new JLabel("Limitada para ");
+        limitLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+        limitLabel.setBounds(12, 157, 108, 16);
+        contentPanel.add(limitLabel);
         
-        JCheckBox chckbxBcc = new JCheckBox("BCC");
-        chckbxBcc.setBounds(194, 111, 56, 25);
-        contentPanel.add(chckbxBcc);
+        JLabel livreLabel = new JLabel("Livre para ");
+        livreLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+        livreLabel.setBounds(12, 199, 134, 16);
+        contentPanel.add(livreLabel);
         
-        JCheckBox chckbxInfo = new JCheckBox("INFO");
-        chckbxInfo.setBounds(254, 111, 56, 25);
-        contentPanel.add(chckbxInfo);
+        JCheckBox obgBct = new JCheckBox("BCT");
+        obgBct.setBounds(134, 111, 56, 25);
+        contentPanel.add(obgBct);
         
-        JLabel lblLimitadaPara = new JLabel("Limitada para ");
-        lblLimitadaPara.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblLimitadaPara.setBounds(12, 157, 108, 16);
-        contentPanel.add(lblLimitadaPara);
+        JCheckBox obgBcc = new JCheckBox("BCC");
+        obgBcc.setBounds(194, 111, 56, 25);
+        contentPanel.add(obgBcc);
         
-        JLabel lblLivrePara = new JLabel("Livre para ");
-        lblLivrePara.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblLivrePara.setBounds(12, 199, 134, 16);
-        contentPanel.add(lblLivrePara);
+        JCheckBox obgInfo = new JCheckBox("INFO");
+        obgInfo.setBounds(254, 111, 56, 25);
+        contentPanel.add(obgInfo);
         
-        JCheckBox checkBox_3 = new JCheckBox("BCT");
-        checkBox_3.setBounds(134, 153, 56, 25);
-        contentPanel.add(checkBox_3);
+        JCheckBox limBct = new JCheckBox("BCT");
+        limBct.setBounds(134, 153, 56, 25);
+        contentPanel.add(limBct);
         
-        JCheckBox checkBox_4 = new JCheckBox("BCC");
-        checkBox_4.setBounds(194, 153, 56, 25);
-        contentPanel.add(checkBox_4);
+        JCheckBox limBcc = new JCheckBox("BCC");
+        limBcc.setBounds(194, 153, 56, 25);
+        contentPanel.add(limBcc);
         
-        JCheckBox checkBox_5 = new JCheckBox("INFO");
-        checkBox_5.setBounds(254, 153, 56, 25);
-        contentPanel.add(checkBox_5);
+        JCheckBox limInfo = new JCheckBox("INFO");
+        limInfo.setBounds(254, 153, 56, 25);
+        contentPanel.add(limInfo);
         
-        JCheckBox checkBox = new JCheckBox("BCT");
-        checkBox.setBounds(134, 195, 56, 25);
-        contentPanel.add(checkBox);
+        JCheckBox livreBct = new JCheckBox("BCT");
+        livreBct.setBounds(134, 195, 56, 25);
+        contentPanel.add(livreBct);
         
-        JCheckBox checkBox_1 = new JCheckBox("BCC");
-        checkBox_1.setBounds(194, 195, 56, 25);
-        contentPanel.add(checkBox_1);
+        JCheckBox livreBcc = new JCheckBox("BCC");
+        livreBcc.setBounds(194, 195, 56, 25);
+        contentPanel.add(livreBcc);
         
-        JCheckBox checkBox_2 = new JCheckBox("INFO");
-        checkBox_2.setBounds(254, 195, 56, 25);
-        contentPanel.add(checkBox_2);
+        JCheckBox livreInfo = new JCheckBox("INFO");
+        livreInfo.setBounds(254, 195, 56, 25);
+        contentPanel.add(livreInfo);
+        
+        // OK Cancel
         {
             JPanel buttonPane = new JPanel();
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
             getContentPane().add(buttonPane, BorderLayout.SOUTH);
             {
                 JButton okButton = new JButton("OK");
+                okButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        
+                        // passar dados ao menu !
+                        
+                        new menu().setVisible(true);
+                        dispose();
+                    }
+                });
                 okButton.setActionCommand("OK");
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
@@ -138,21 +132,23 @@ public class addMateria extends JDialog {
             {
                 JButton cancelButton = new JButton("Cancel");
                 cancelButton.addActionListener(new ActionListener() {
-                	public void actionPerformed(ActionEvent e) {
-                        //fechar janela Marina v1
-                        System.exit(0);
-                	}
+                    public void actionPerformed(ActionEvent arg0) {
+                        new menu().setVisible(true);
+                        dispose();
+                    }
                 });
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
             }
         }
         
+        //icone do programa
         try {
             super.setIconImage(ImageIO.read(new File("img/icon.png")));
         } catch (Exception e) {
                 e.printStackTrace();
         }
+        //centralizar
         setLocationRelativeTo(null);
     }
 }

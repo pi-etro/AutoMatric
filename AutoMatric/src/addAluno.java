@@ -2,13 +2,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -16,34 +14,20 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import java.awt.SystemColor;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 
 public class addAluno extends JDialog {
-
+    private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
-    private JTextField txtRA;
-    private JTextField txtCR;
-    private JTextField txtCA;
+    private JTextField ra;
+    private JTextField cr;
+    private JTextField CP1;
+    private JTextField CP2;
+    private JTextField CP3;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        try {
-            addAluno dialog = new addAluno();
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            dialog.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Create the dialog.
-     */
     public addAluno() {
         setTitle("Adicionar Aluno");
         setResizable(false);
@@ -57,108 +41,133 @@ public class addAluno extends JDialog {
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
         
-        JLabel lblAluno = new JLabel("Aluno");
-        lblAluno.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblAluno.setBounds(25, 13, 56, 16);
-        contentPanel.add(lblAluno);
+        JLabel alunoLabel = new JLabel("Aluno");
+        alunoLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+        alunoLabel.setBounds(25, 13, 56, 16);
+        contentPanel.add(alunoLabel);
         
-        JLabel lblRa = new JLabel("RA");
-        lblRa.setBounds(25, 41, 56, 16);
-        contentPanel.add(lblRa);
+        JLabel raLabel = new JLabel("RA");
+        raLabel.setBounds(25, 41, 56, 16);
+        contentPanel.add(raLabel);
         
-        txtRA = new JTextField();
-        txtRA.setText("Digite aqui...");
-        txtRA.setBounds(48, 38, 116, 22);
-        contentPanel.add(txtRA);
-        txtRA.setColumns(10);
+        ra = new JTextField();
+        ra.setText("Digite aqui...");
+        ra.setBounds(48, 38, 116, 22);
+        contentPanel.add(ra);
+        ra.setColumns(10);
         
-        JLabel lblCr = new JLabel("CR ");
-        lblCr.setBounds(25, 70, 56, 16);
-        contentPanel.add(lblCr);
+        JLabel crLabel = new JLabel("CR ");
+        crLabel.setBounds(25, 70, 56, 16);
+        contentPanel.add(crLabel);
         
-        txtCR = new JTextField();
-        txtCR.setText("Digite aqui...");
-        txtCR.setBounds(48, 67, 116, 22);
-        contentPanel.add(txtCR);
-        txtCR.setColumns(10);
+        cr = new JTextField();
+        cr.setText("Digite aqui...");
+        cr.setBounds(48, 67, 116, 22);
+        contentPanel.add(cr);
+        cr.setColumns(10);
         
-        JLabel lblTurno = new JLabel("Turno");
-        lblTurno.setBounds(236, 41, 56, 16);
-        contentPanel.add(lblTurno);
+        JLabel turnoLabel = new JLabel("Turno");
+        turnoLabel.setBounds(236, 41, 56, 16);
+        contentPanel.add(turnoLabel);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setBackground(SystemColor.inactiveCaptionBorder);
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Matutino", "Noturno"}));
-        comboBox.setBounds(285, 38, 116, 22);
-        contentPanel.add(comboBox);
+        JComboBox turnoBox = new JComboBox();
+        turnoBox.setBackground(SystemColor.inactiveCaptionBorder);
+        turnoBox.setModel(new DefaultComboBoxModel(new String[] {"Matutino", "Noturno"}));
+        turnoBox.setBounds(285, 38, 116, 22);
+        contentPanel.add(turnoBox);
         
-        txtCA = new JTextField();
-        txtCA.setText("Digite aqui...");
-        txtCA.setColumns(10);
-        txtCA.setBounds(48, 99, 116, 22);
-        contentPanel.add(txtCA);
+        JLabel biLabel = new JLabel("BI");
+        biLabel.setBounds(236, 70, 56, 16);
+        contentPanel.add(biLabel);
         
-        JLabel lblCa = new JLabel("CA");
-        lblCa.setBounds(25, 102, 56, 16);
-        contentPanel.add(lblCa);
+        JComboBox biBox = new JComboBox();
+        biBox.setBackground(SystemColor.inactiveCaptionBorder);
+        biBox.setModel(new DefaultComboBoxModel(new String[] {"BCT", "BCH"}));
+        biBox.setBounds(285, 70, 116, 22);
+        contentPanel.add(biBox);
         
-        JLabel lblBi = new JLabel("BI");
-        lblBi.setBounds(236, 70, 56, 16);
-        contentPanel.add(lblBi);
+        JLabel posbiLabel = new JLabel("P\u00F3s Bacharelado");
+        posbiLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+        posbiLabel.setBounds(25, 144, 139, 16);
+        contentPanel.add(posbiLabel);
         
-        JComboBox comboBox_1 = new JComboBox();
-        comboBox_1.setBackground(SystemColor.inactiveCaptionBorder);
-        comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"BCT", "BCH"}));
-        comboBox_1.setBounds(285, 70, 116, 22);
-        contentPanel.add(comboBox_1);
+        JCheckBox simbiCheck = new JCheckBox("Sim");
+        simbiCheck.setBounds(179, 140, 113, 25);
+        contentPanel.add(simbiCheck);
         
-        JLabel lblPsBacharelado = new JLabel("P\u00F3s Bacharelado");
-        lblPsBacharelado.setFont(new Font("Tahoma", Font.BOLD, 13));
-        lblPsBacharelado.setBounds(25, 144, 139, 16);
-        contentPanel.add(lblPsBacharelado);
+        JCheckBox naobiCheck = new JCheckBox("N\u00E3o");
+        naobiCheck.setBounds(288, 140, 113, 25);
+        contentPanel.add(naobiCheck);
         
-        JCheckBox chckbxSim = new JCheckBox("Sim");
-        chckbxSim.setBounds(179, 140, 113, 25);
-        contentPanel.add(chckbxSim);
+        JLabel umLabel = new JLabel("1. ");
+        umLabel.setBounds(25, 173, 56, 16);
+        contentPanel.add(umLabel);
         
-        JCheckBox chckbxNo = new JCheckBox("N\u00E3o");
-        chckbxNo.setBounds(288, 140, 113, 25);
-        contentPanel.add(chckbxNo);
+        JLabel doisLabel = new JLabel("2.");
+        doisLabel.setBounds(25, 202, 56, 16);
+        contentPanel.add(doisLabel);
         
-        JLabel label = new JLabel("1. ");
-        label.setBounds(25, 173, 56, 16);
-        contentPanel.add(label);
+        JLabel tresLabel = new JLabel("3. ");
+        tresLabel.setBounds(25, 231, 56, 16);
+        contentPanel.add(tresLabel);
         
-        JLabel label_1 = new JLabel("2.");
-        label_1.setBounds(25, 202, 56, 16);
-        contentPanel.add(label_1);
+        JComboBox curso1Box = new JComboBox();
+        curso1Box.setBackground(SystemColor.inactiveCaptionBorder);
+        curso1Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o", "Engenharia de Informa\u00E7\u00E3o"}));
+        curso1Box.setBounds(48, 170, 353, 22);
+        contentPanel.add(curso1Box);
         
-        JLabel label_2 = new JLabel("3. ");
-        label_2.setBounds(25, 231, 56, 16);
-        contentPanel.add(label_2);
+        JComboBox curso2Box = new JComboBox();
+        curso2Box.setBackground(SystemColor.inactiveCaptionBorder);
+        curso2Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o", "Engenharia de Informa\u00E7\u00E3o"}));
+        curso2Box.setBounds(48, 199, 353, 22);
+        contentPanel.add(curso2Box);
         
-        JComboBox comboBox_2 = new JComboBox();
-        comboBox_2.setBackground(SystemColor.inactiveCaptionBorder);
-        comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o", "Engenharia de Informa\u00E7\u00E3o"}));
-        comboBox_2.setBounds(48, 170, 353, 22);
-        contentPanel.add(comboBox_2);
+        JComboBox curso3Box = new JComboBox();
+        curso3Box.setBackground(SystemColor.inactiveCaptionBorder);
+        curso3Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o", "Engenharia de Informa\u00E7\u00E3o"}));
+        curso3Box.setBounds(48, 228, 353, 22);
+        contentPanel.add(curso3Box);
         
-        JComboBox comboBox_4 = new JComboBox();
-        comboBox_4.setBackground(SystemColor.inactiveCaptionBorder);
-        comboBox_4.setBounds(48, 228, 353, 22);
-        contentPanel.add(comboBox_4);
+        JLabel cpLabel = new JLabel("CP");
+        cpLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        cpLabel.setBounds(418, 142, 56, 16);
+        contentPanel.add(cpLabel);
         
-        JComboBox comboBox_3 = new JComboBox();
-        comboBox_3.setBackground(SystemColor.inactiveCaptionBorder);
-        comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Engenharia da Informa\u00E7\u00E3o ", "Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o"}));
-        comboBox_3.setBounds(48, 199, 353, 22);
-        contentPanel.add(comboBox_3);
+        CP1 = new JTextField();
+        CP1.setText("Digite aqui...");
+        CP1.setColumns(10);
+        CP1.setBounds(409, 170, 74, 22);
+        contentPanel.add(CP1);
+        
+        CP2 = new JTextField();
+        CP2.setText("Digite aqui...");
+        CP2.setColumns(10);
+        CP2.setBounds(409, 199, 74, 22);
+        contentPanel.add(CP2);
+        
+        CP3 = new JTextField();
+        CP3.setText("Digite aqui...");
+        CP3.setColumns(10);
+        CP3.setBounds(409, 228, 74, 22);
+        contentPanel.add(CP3);
+        
+        // OK Cancel
         {
             JPanel buttonPane = new JPanel();
             buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
             getContentPane().add(buttonPane, BorderLayout.SOUTH);
             {
                 JButton okButton = new JButton("OK");
+                okButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent arg0) {
+                        
+                        // passar dados ao menu !
+                        
+                        new menu().setVisible(true);
+                        dispose();
+                    }
+                });
                 okButton.setActionCommand("OK");
                 buttonPane.add(okButton);
                 getRootPane().setDefaultButton(okButton);
@@ -166,21 +175,23 @@ public class addAluno extends JDialog {
             {
                 JButton cancelButton = new JButton("Cancel");
                 cancelButton.addActionListener(new ActionListener() {
-                	public void actionPerformed(ActionEvent e) {
-                        //fechar janela Marina v1
-                        System.exit(0);
-                	}
+                    public void actionPerformed(ActionEvent arg0) {
+                        new menu().setVisible(true);
+                        dispose();
+                    }
                 });
                 cancelButton.setActionCommand("Cancel");
-                buttonPane.add(cancelButton);            
+                buttonPane.add(cancelButton);
             }
         }
         
+        //icone do programa
         try {
             super.setIconImage(ImageIO.read(new File("img/icon.png")));
         } catch (Exception e) {
                 e.printStackTrace();
         }
+        //centralizar
         setLocationRelativeTo(null);
     }
 }
