@@ -6,7 +6,9 @@ AutoMatric is a project to automate the UFABC students subject enrollment proces
 
 ## Usage
 
-
+<p align="center">
+  <img width="660" height="460" src="https://raw.githubusercontent.com/pi-etro/AutoMatric/master/img/demo.gif">
+</p>
 
 ## License
 [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)
