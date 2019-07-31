@@ -1,3 +1,4 @@
+package sistema;
 
 public abstract class Bacharelado implements Materia {
 	private String BI, posBI;
@@ -5,7 +6,7 @@ public abstract class Bacharelado implements Materia {
 	private String limitadas[] = new String[20];
 	private String livrepos[] = new String[20];
 
-	//receber dados do banco de dados, talvez a classe não seja abstrata
+	//receber dados do banco de dados, talvez a classe nï¿½o seja abstrata
 	
 
 }

@@ -1,5 +1,6 @@
+package sistema;
 
-public interface Materia {
+public interface Classificacao {
 	String codigoDisciplina="";
 	String nomeDisciplina="";
 }

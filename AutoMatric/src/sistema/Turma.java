@@ -1,4 +1,4 @@
-
+package sistema;
 public class Turma extends Bacharelado {
 	private Aluno classificados[], matriculados[];
 	private String turno, campus, turma;
@@ -12,9 +12,9 @@ public class Turma extends Bacharelado {
 			return false;		
 	}
 	//metodos
-		//receber se é BI ou pós BI -> recebe informações do Bacharelado
+		//receber se ï¿½ BI ou pï¿½s BI -> recebe informaï¿½ï¿½es do Bacharelado
 		//verificar se qtde de vagas ultrapassa 150% -> receber quantidade de vagas pelo banco de dados da turma
-		//classificar por: reserva, turno, CP e CR -> receber informações da classe aluno
+		//classificar por: reserva, turno, CP e CR -> receber informaï¿½ï¿½es da classe aluno
 		//gerar lista ligada de classificados e inscritos.
 		//retornar ordem de lista ligada para csv, em inscritos, indicar omotivos de chute da disciplina
 	
