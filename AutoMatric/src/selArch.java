@@ -37,24 +37,24 @@ public class selArch extends JDialog {
         alunoLabel.setBounds(40, 30, 290, 14);
         contentPanel.add(alunoLabel);
         
-        JLabel matLabel = new JLabel("Banco de Matérias");
+        JLabel matLabel = new JLabel("Banco de Materias");
         matLabel.setBounds(40, 90, 290, 14);
         contentPanel.add(matLabel);
         
-        JLabel oferLabel = new JLabel("Banco de Matérias Ofertadas");
+        JLabel oferLabel = new JLabel("Banco de Materias Ofertadas");
         oferLabel.setBounds(40, 150, 290, 14);
         contentPanel.add(oferLabel);
         
-        JLabel matrLabel = new JLabel("Banco de Matrículados");
+        JLabel matrLabel = new JLabel("Banco de Matriculados");
         matrLabel.setBounds(40, 210, 290, 14);
         contentPanel.add(matrLabel);
         
         JButton btnStud = new JButton("...");
         btnStud.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                JFileChooser file = new JFileChooser(); 
-                file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int i= file.showSaveDialog(null);
+              JFileChooser file = new JFileChooser(); 
+              file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+              int i= file.showSaveDialog(null);
               if (i!=1){
                   File arquivo = file.getSelectedFile();
                   alunoFile.setText(arquivo.getPath());
@@ -67,6 +67,12 @@ public class selArch extends JDialog {
         JButton btnSub = new JButton("...");
         btnSub.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                JFileChooser file = new JFileChooser(); 
+                file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int i= file.showSaveDialog(null);
+                if (i!=1){
+                    materiasFile.setText(file.getSelectedFile().getPath());
+                }
             }
         });
         btnSub.setBounds(330, 110, 30, 25);
@@ -75,6 +81,12 @@ public class selArch extends JDialog {
         JButton btnOfer = new JButton("...");
         btnOfer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                JFileChooser file = new JFileChooser(); 
+                file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int i= file.showSaveDialog(null);
+                if (i!=1){
+                    ofertaFile.setText(file.getSelectedFile().getPath());
+                }
             }
         });
         btnOfer.setBounds(330, 170, 30, 25);
@@ -83,6 +95,12 @@ public class selArch extends JDialog {
         JButton btnMatr = new JButton("...");
         btnMatr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                JFileChooser file = new JFileChooser(); 
+                file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int i= file.showSaveDialog(null);
+                if (i!=1){
+                    matriculaFile.setText(file.getSelectedFile().getPath());
+                }
             }
         });
         btnMatr.setBounds(330, 230, 30, 25);
