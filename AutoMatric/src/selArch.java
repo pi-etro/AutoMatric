@@ -72,17 +72,19 @@ public class selArch extends JDialog {
         alunoFile.setColumns(10);
         
         materiasFile = new JTextField();
-        if(menu.getCsvAluno() != null) alunoFile.setText(menu.getCsvAluno());
+        if(menu.getCsvMaterias() != null) alunoFile.setText(menu.getCsvMaterias());
         materiasFile.setBounds(40, 110, 290, 25);
         contentPanel.add(materiasFile);
         materiasFile.setColumns(10);
         
         ofertaFile = new JTextField();
+        if(menu.getCsvOferta() != null) alunoFile.setText(menu.getCsvOferta());
         ofertaFile.setBounds(40, 170, 290, 25);
         contentPanel.add(ofertaFile);
         ofertaFile.setColumns(10);
 
         matriculaFile = new JTextField();
+        if(menu.getCsvMatriculados() != null) alunoFile.setText(menu.getCsvMatriculados());
         matriculaFile.setBounds(40, 230, 290, 25);
         contentPanel.add(matriculaFile);
         matriculaFile.setColumns(10);
@@ -96,8 +98,10 @@ public class selArch extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                        
                         menu.setCsvAluno(alunoFile.getText());
+                        menu.setCsvMaterias(materiasFile.getText());
+                        menu.setCsvOferta(ofertaFile.getText());
+                        menu.setCsvMatriculados(matriculaFile.getText());
                         new menu().setVisible(true);
                         dispose();
                     }

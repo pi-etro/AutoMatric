@@ -111,7 +111,7 @@ public class menu extends JFrame {
     public static void setCsvMaterias(String adrss) {
         csvMaterias = adrss;
     }
-    public static String getCsvMateria() {
+    public static String getCsvMaterias() {
         return csvMaterias;
     }
     
