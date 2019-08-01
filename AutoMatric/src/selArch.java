@@ -4,6 +4,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -26,7 +27,6 @@ public class selArch extends JDialog {
         setForeground(Color.LIGHT_GRAY);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setBackground(Color.DARK_GRAY);
-        setAlwaysOnTop(true);
         setBounds(100, 100, 500, 350);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,18 +50,41 @@ public class selArch extends JDialog {
         contentPanel.add(matrLabel);
         
         JButton btnStud = new JButton("...");
+        btnStud.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                JFileChooser file = new JFileChooser(); 
+                file.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int i= file.showSaveDialog(null);
+              if (i!=1){
+                  File arquivo = file.getSelectedFile();
+                  alunoFile.setText(arquivo.getPath());
+              }
+            }
+        });
         btnStud.setBounds(330, 50, 30, 25);
         contentPanel.add(btnStud);
         
         JButton btnSub = new JButton("...");
+        btnSub.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+            }
+        });
         btnSub.setBounds(330, 110, 30, 25);
         contentPanel.add(btnSub);
         
         JButton btnOfer = new JButton("...");
+        btnOfer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+            }
+        });
         btnOfer.setBounds(330, 170, 30, 25);
         contentPanel.add(btnOfer);
         
         JButton btnMatr = new JButton("...");
+        btnMatr.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+            }
+        });
         btnMatr.setBounds(330, 230, 30, 25);
         contentPanel.add(btnMatr);
         
@@ -72,19 +95,19 @@ public class selArch extends JDialog {
         alunoFile.setColumns(10);
         
         materiasFile = new JTextField();
-        if(menu.getCsvMaterias() != null) alunoFile.setText(menu.getCsvMaterias());
+        if(menu.getCsvMaterias() != null) materiasFile.setText(menu.getCsvMaterias());
         materiasFile.setBounds(40, 110, 290, 25);
         contentPanel.add(materiasFile);
         materiasFile.setColumns(10);
         
         ofertaFile = new JTextField();
-        if(menu.getCsvOferta() != null) alunoFile.setText(menu.getCsvOferta());
+        if(menu.getCsvOferta() != null) ofertaFile.setText(menu.getCsvOferta());
         ofertaFile.setBounds(40, 170, 290, 25);
         contentPanel.add(ofertaFile);
         ofertaFile.setColumns(10);
 
         matriculaFile = new JTextField();
-        if(menu.getCsvMatriculados() != null) alunoFile.setText(menu.getCsvMatriculados());
+        if(menu.getCsvMatriculados() != null) matriculaFile.setText(menu.getCsvMatriculados());
         matriculaFile.setBounds(40, 230, 290, 25);
         contentPanel.add(matriculaFile);
         matriculaFile.setColumns(10);
