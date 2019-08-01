@@ -32,6 +32,13 @@ public class classificar extends JDialog {
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
         
+        JLabel statusLabel = new JLabel("Status...");
+        statusLabel.setVerticalAlignment(SwingConstants.TOP);
+        statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        statusLabel.setBounds(40, 113, 410, 117);
+        contentPanel.add(statusLabel);
+        statusLabel.setForeground(Color.GREEN);
+        
         JLabel salveremLabel = new JLabel("Salvar Arquivos em");
         salveremLabel.setBounds(40, 30, 290, 14);
         contentPanel.add(salveremLabel);
@@ -44,13 +51,6 @@ public class classificar extends JDialog {
         dirsalvar.setBounds(40, 50, 290, 25);
         contentPanel.add(dirsalvar);
         dirsalvar.setColumns(10);
-        
-        JLabel statusLabel = new JLabel("Status...");
-        statusLabel.setVerticalAlignment(SwingConstants.TOP);
-        statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        statusLabel.setBounds(40, 113, 410, 117);
-        contentPanel.add(statusLabel);
-        statusLabel.setForeground(Color.GREEN);
         
         txtStatus = new JTextField();
         txtStatus.setEditable(false);

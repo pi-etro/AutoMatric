@@ -74,7 +74,7 @@ public class menu extends JFrame {
         });
         
         // Adicionar Materia
-        JButton btnSub = new JButton("Adicionar Matéria");
+        JButton btnSub = new JButton("Adicionar Materia");
         btnSub.setBounds(280, 217, 153, 26);
         contentPane.add(btnSub);
         btnSub.addActionListener(new ActionListener() {
