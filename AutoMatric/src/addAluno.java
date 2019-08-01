@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import sistema.*;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
@@ -17,6 +18,10 @@ import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class addAluno extends JDialog {
@@ -51,6 +56,14 @@ public class addAluno extends JDialog {
         contentPanel.add(raLabel);
         
         ra = new JTextField();
+        ra.addFocusListener(new FocusAdapter() {
+        	public void focusGained(FocusEvent e) {
+        		 ra.setText(" "); 
+        	}
+        	public void focusLost(FocusEvent e) {
+                ra.setText("Digite aqui..."); 
+        	}
+        });
         ra.setText("Digite aqui...");
         ra.setBounds(48, 38, 116, 22);
         contentPanel.add(ra);
@@ -61,6 +74,14 @@ public class addAluno extends JDialog {
         contentPanel.add(crLabel);
         
         cr = new JTextField();
+        cr.addFocusListener(new FocusAdapter() {
+        	public void focusGained(FocusEvent e) {
+        		 cr.setText(" "); 
+        	}
+        	public void focusLost(FocusEvent e) {
+                cr.setText("Digite aqui..."); 
+        	}
+        });
         cr.setText("Digite aqui...");
         cr.setBounds(48, 67, 116, 22);
         contentPanel.add(cr);
@@ -92,6 +113,7 @@ public class addAluno extends JDialog {
         contentPanel.add(posbiLabel);
         
         JCheckBox simbiCheck = new JCheckBox("Sim");
+        simbiCheck.setSelected(true);
         simbiCheck.setBounds(179, 140, 113, 25);
         contentPanel.add(simbiCheck);
         
@@ -124,7 +146,9 @@ public class addAluno extends JDialog {
         contentPanel.add(curso2Box);
         
         JComboBox curso3Box = new JComboBox();
-        curso3Box.setBackground(SystemColor.inactiveCaptionBorder);
+        curso3Box.setEnabled(false);
+        curso3Box.setEditable(true);
+        curso3Box.setBackground(Color.LIGHT_GRAY);
         curso3Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o", "Engenharia de Informa\u00E7\u00E3o"}));
         curso3Box.setBounds(48, 228, 353, 22);
         contentPanel.add(curso3Box);
@@ -134,19 +158,43 @@ public class addAluno extends JDialog {
         cpLabel.setBounds(418, 142, 56, 16);
         contentPanel.add(cpLabel);
         
-        CP1 = new JTextField();
-        CP1.setText("Digite aqui...");
+        CP1 = new JTextField();       
+        CP1.addFocusListener(new FocusAdapter() {
+        	public void focusGained(FocusEvent e) {
+        		 CP1.setText(" "); 
+        	}
+        	public void focusLost(FocusEvent e) {
+                CP1.setText("Digite aqui..."); 
+        	}
+        });
+        CP1.setText("Digite aqui...");       
         CP1.setColumns(10);
         CP1.setBounds(409, 170, 74, 22);
-        contentPanel.add(CP1);
+        contentPanel.add(CP1);     
         
         CP2 = new JTextField();
+        CP2.addFocusListener(new FocusAdapter() {
+        	public void focusGained(FocusEvent e) {
+        		 CP2.setText(" "); 
+        	}
+        	public void focusLost(FocusEvent e) {
+                CP2.setText("Digite aqui..."); 
+        	}
+        });
         CP2.setText("Digite aqui...");
         CP2.setColumns(10);
         CP2.setBounds(409, 199, 74, 22);
         contentPanel.add(CP2);
         
         CP3 = new JTextField();
+        CP3.addFocusListener(new FocusAdapter() {
+        	public void focusGained(FocusEvent e) {
+        		 CP3.setText(" "); 
+        	}
+        	public void focusLost(FocusEvent e) {
+                CP3.setText("Digite aqui..."); 
+        	}
+        });
         CP3.setText("Digite aqui...");
         CP3.setColumns(10);
         CP3.setBounds(409, 228, 74, 22);

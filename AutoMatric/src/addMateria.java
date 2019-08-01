@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -43,6 +45,14 @@ public class addMateria extends JDialog {
         contentPanel.add(codLabel);
         
         codigo = new JTextField();
+        codigo.addFocusListener(new FocusAdapter() {
+        	public void focusGained(FocusEvent e) {
+        		 codigo.setText(" "); 
+        	}
+        	public void focusLost(FocusEvent e) {
+                codigo.setText("Digite aqui..."); 
+        	}
+        });
         codigo.setText("Digite aqui...");
         codigo.setBounds(80, 39, 80, 22);
         contentPanel.add(codigo);
@@ -53,6 +63,14 @@ public class addMateria extends JDialog {
         contentPanel.add(nomeLabel);
         
         nome = new JTextField();
+        nome.addFocusListener(new FocusAdapter() {
+        	public void focusGained(FocusEvent e) {
+        		 nome.setText(" "); 
+        	}
+        	public void focusLost(FocusEvent e) {
+                nome.setText("Digite aqui..."); 
+        	}
+        });
         nome.setText("Digite aqui...");
         nome.setColumns(10);
         nome.setBounds(80, 71, 326, 22);

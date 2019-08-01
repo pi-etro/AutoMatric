@@ -5,5 +5,5 @@ public class Aluno {
 	private String turnoMatriculado;
 	private boolean reservaVaga;
 	
-	//obter essas informa��es do banco de dados	
+	
 }
