@@ -37,15 +37,15 @@ public class selArch extends JDialog {
         alunoLabel.setBounds(40, 30, 290, 14);
         contentPanel.add(alunoLabel);
         
-        JLabel matLabel = new JLabel("Banco de Matérias");
+        JLabel matLabel = new JLabel("Banco de Materias");
         matLabel.setBounds(40, 90, 290, 14);
         contentPanel.add(matLabel);
         
-        JLabel oferLabel = new JLabel("Banco de Matérias Ofertadas");
+        JLabel oferLabel = new JLabel("Banco de Materias Ofertadas");
         oferLabel.setBounds(40, 150, 290, 14);
         contentPanel.add(oferLabel);
         
-        JLabel matrLabel = new JLabel("Banco de Matrículados");
+        JLabel matrLabel = new JLabel("Banco de Matriculados");
         matrLabel.setBounds(40, 210, 290, 14);
         contentPanel.add(matrLabel);
         
