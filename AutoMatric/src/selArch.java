@@ -18,6 +18,7 @@ public class selArch extends JDialog {
     private JTextField alunoFile;
     private JTextField materiasFile;
     private JTextField matriculaFile;
+    private JTextField ofertaFile;
 
     public selArch() {
         setTitle("Selecionar Arquivos");
@@ -32,16 +33,20 @@ public class selArch extends JDialog {
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
         
-        JLabel studLabel = new JLabel("Banco de Alunos");
-        studLabel.setBounds(40, 30, 290, 14);
-        contentPanel.add(studLabel);
+        JLabel alunoLabel = new JLabel("Banco de Alunos");
+        alunoLabel.setBounds(40, 30, 290, 14);
+        contentPanel.add(alunoLabel);
         
-        JLabel subLabel = new JLabel("Banco de Matérias");
-        subLabel.setBounds(40, 90, 290, 14);
-        contentPanel.add(subLabel);
+        JLabel matLabel = new JLabel("Banco de Matérias");
+        matLabel.setBounds(40, 90, 290, 14);
+        contentPanel.add(matLabel);
         
-        JLabel matrLabel = new JLabel("Banco de Matrículas");
-        matrLabel.setBounds(40, 150, 290, 14);
+        JLabel oferLabel = new JLabel("Banco de Matérias Ofertadas");
+        oferLabel.setBounds(40, 150, 290, 14);
+        contentPanel.add(oferLabel);
+        
+        JLabel matrLabel = new JLabel("Banco de Matrículados");
+        matrLabel.setBounds(40, 210, 290, 14);
         contentPanel.add(matrLabel);
         
         JButton btnStud = new JButton("...");
@@ -52,22 +57,33 @@ public class selArch extends JDialog {
         btnSub.setBounds(330, 110, 30, 25);
         contentPanel.add(btnSub);
         
+        JButton btnOfer = new JButton("...");
+        btnOfer.setBounds(330, 170, 30, 25);
+        contentPanel.add(btnOfer);
+        
         JButton btnMatr = new JButton("...");
-        btnMatr.setBounds(330, 170, 30, 25);
+        btnMatr.setBounds(330, 230, 30, 25);
         contentPanel.add(btnMatr);
         
         alunoFile = new JTextField();
+        if(menu.getCsvAluno() != null) alunoFile.setText(menu.getCsvAluno());
         alunoFile.setBounds(40, 50, 290, 25);
         contentPanel.add(alunoFile);
         alunoFile.setColumns(10);
         
         materiasFile = new JTextField();
+        if(menu.getCsvAluno() != null) alunoFile.setText(menu.getCsvAluno());
         materiasFile.setBounds(40, 110, 290, 25);
         contentPanel.add(materiasFile);
         materiasFile.setColumns(10);
         
+        ofertaFile = new JTextField();
+        ofertaFile.setBounds(40, 170, 290, 25);
+        contentPanel.add(ofertaFile);
+        ofertaFile.setColumns(10);
+
         matriculaFile = new JTextField();
-        matriculaFile.setBounds(40, 170, 290, 25);
+        matriculaFile.setBounds(40, 230, 290, 25);
         contentPanel.add(matriculaFile);
         matriculaFile.setColumns(10);
         
@@ -81,8 +97,7 @@ public class selArch extends JDialog {
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
                         
-                        // passar dados ao menu !
-                        
+                        menu.setCsvAluno(alunoFile.getText());
                         new menu().setVisible(true);
                         dispose();
                     }

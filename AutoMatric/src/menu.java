@@ -16,6 +16,11 @@ public class menu extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     
+    private static String csvAluno;
+    private static String csvOferta;
+    private static String csvMaterias;
+    private static String csvMatriculados;
+    
     public menu() {
         setResizable(false);
         setBackground(Color.DARK_GRAY);
@@ -87,5 +92,33 @@ public class menu extends JFrame {
         }
         //centralizar
         setLocationRelativeTo(null);
+    }
+    
+    public static void setCsvAluno(String adrss) {
+        csvAluno = adrss;
+    }
+    public static String getCsvAluno() {
+        return csvAluno;
+    }
+    
+    public static void setCsvOferta(String adrss) {
+        csvOferta = adrss;
+    }
+    public static String getCsvOferta() {
+        return csvOferta;
+    }
+    
+    public static void setCsvMaterias(String adrss) {
+        csvMaterias = adrss;
+    }
+    public static String getCsvMateria() {
+        return csvMaterias;
+    }
+    
+    public static void setCsvMatriculados(String adrss) {
+        csvMatriculados = adrss;
+    }
+    public static String getCsvMatriculados() {
+        return csvMatriculados;
     }
 }
