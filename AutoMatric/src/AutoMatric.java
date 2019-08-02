@@ -47,6 +47,10 @@ public class AutoMatric {
         btnIni.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 //botao iniciar leva ao menu
+                menu.setCsvAluno(null);
+                menu.setCsvMaterias(null);
+                menu.setCsvMatriculados(null);
+                menu.setCsvOferta(null);
                 new menu().setVisible(true);
                 frmAutomatric.dispose();
             }

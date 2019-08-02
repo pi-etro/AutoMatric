@@ -13,6 +13,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
 
 public class selArch extends JDialog {
@@ -121,25 +123,61 @@ public class selArch extends JDialog {
         contentPanel.add(btnMatr);
         
         alunoFile = new JTextField();
+        alunoFile.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(alunoFile.getText().equals("Digite aqui...")) alunoFile.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(alunoFile.getText().equals("")) alunoFile.setText("Digite aqui...");
+            }
+        });
         if(menu.getCsvAluno() != null) alunoFile.setText(menu.getCsvAluno());
+        else alunoFile.setText("Digite aqui...");
         alunoFile.setBounds(40, 50, 290, 25);
         contentPanel.add(alunoFile);
         alunoFile.setColumns(10);
         
         materiasFile = new JTextField();
-        if(menu.getCsvMaterias() != null) materiasFile.setText(menu.getCsvMaterias());
+        materiasFile.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(materiasFile.getText().equals("Digite aqui...")) materiasFile.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(materiasFile.getText().equals("")) materiasFile.setText("Digite aqui...");
+            }
+        });
+        if(menu.getCsvAluno() != null) materiasFile.setText(menu.getCsvAluno());
+        else materiasFile.setText("Digite aqui...");
         materiasFile.setBounds(40, 110, 290, 25);
         contentPanel.add(materiasFile);
         materiasFile.setColumns(10);
         
         ofertaFile = new JTextField();
-        if(menu.getCsvOferta() != null) ofertaFile.setText(menu.getCsvOferta());
+        ofertaFile.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(ofertaFile.getText().equals("Digite aqui...")) ofertaFile.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(ofertaFile.getText().equals("")) ofertaFile.setText("Digite aqui...");
+            }
+        });
+        if(menu.getCsvAluno() != null) ofertaFile.setText(menu.getCsvAluno());
+        else ofertaFile.setText("Digite aqui...");
         ofertaFile.setBounds(40, 170, 290, 25);
         contentPanel.add(ofertaFile);
         ofertaFile.setColumns(10);
 
         matriculaFile = new JTextField();
-        if(menu.getCsvMatriculados() != null) matriculaFile.setText(menu.getCsvMatriculados());
+        matriculaFile.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(matriculaFile.getText().equals("Digite aqui...")) matriculaFile.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(matriculaFile.getText().equals("")) matriculaFile.setText("Digite aqui...");
+            }
+        });
+        if(menu.getCsvAluno() != null) matriculaFile.setText(menu.getCsvAluno());
+        else matriculaFile.setText("Digite aqui...");
         matriculaFile.setBounds(40, 230, 290, 25);
         contentPanel.add(matriculaFile);
         matriculaFile.setColumns(10);
