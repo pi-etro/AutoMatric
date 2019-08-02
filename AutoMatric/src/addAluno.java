@@ -22,6 +22,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JRadioButton;
 
 
 public class addAluno extends JDialog {
@@ -93,7 +94,7 @@ public class addAluno extends JDialog {
         
         JComboBox turnoBox = new JComboBox();
         turnoBox.setBackground(SystemColor.inactiveCaptionBorder);
-        turnoBox.setModel(new DefaultComboBoxModel(new String[] {"Matutino", "Noturno"}));
+        turnoBox.setModel(new DefaultComboBoxModel(new String[] {"Diurno", "Noturno"}));
         turnoBox.setBounds(285, 38, 116, 22);
         contentPanel.add(turnoBox);
         
@@ -111,15 +112,8 @@ public class addAluno extends JDialog {
         posbiLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
         posbiLabel.setBounds(25, 144, 139, 16);
         contentPanel.add(posbiLabel);
-        
-        JCheckBox simbiCheck = new JCheckBox("Sim");
-        simbiCheck.setSelected(true);
-        simbiCheck.setBounds(179, 140, 113, 25);
-        contentPanel.add(simbiCheck);
-        
-        JCheckBox naobiCheck = new JCheckBox("N\u00E3o");
-        naobiCheck.setBounds(288, 140, 113, 25);
-        contentPanel.add(naobiCheck);
+               
+       
         
         JLabel umLabel = new JLabel("1. ");
         umLabel.setBounds(25, 173, 56, 16);
@@ -199,6 +193,33 @@ public class addAluno extends JDialog {
         CP3.setColumns(10);
         CP3.setBounds(409, 228, 74, 22);
         contentPanel.add(CP3);
+        
+        final JRadioButton naobirb = new JRadioButton("Nao");        
+        naobirb.setBounds(250, 139, 56, 23);
+        contentPanel.add(naobirb);
+        
+        final JRadioButton simbirb = new JRadioButton("Sim");
+        simbirb.setBounds(170, 139, 56, 23);
+        contentPanel.add(simbirb);
+        
+        naobirb.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		if(naobirb.isSelected())
+        	{
+        		simbirb.setSelected(false);
+        		}
+        	}
+        });
+        
+        simbirb.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		if(simbirb.isSelected())
+        	{
+        		naobirb.setSelected(false);
+        		}
+        	}
+        });
+               
         
         // OK Cancel
         {
