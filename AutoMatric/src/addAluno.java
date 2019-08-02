@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import sistema.*;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
@@ -20,10 +19,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+<<<<<<< HEAD
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JRadioButton;
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 public class addAluno extends JDialog {
     private static final long serialVersionUID = 1L;
@@ -59,7 +61,7 @@ public class addAluno extends JDialog {
         ra = new JTextField();
         ra.addFocusListener(new FocusAdapter() {
         	public void focusGained(FocusEvent e) {
-        		 ra.setText(" "); 
+        		 ra.setText(""); 
         	}
         	public void focusLost(FocusEvent e) {
                 ra.setText("Digite aqui..."); 
@@ -77,7 +79,7 @@ public class addAluno extends JDialog {
         cr = new JTextField();
         cr.addFocusListener(new FocusAdapter() {
         	public void focusGained(FocusEvent e) {
-        		 cr.setText(" "); 
+        		 cr.setText(""); 
         	}
         	public void focusLost(FocusEvent e) {
                 cr.setText("Digite aqui..."); 
@@ -155,7 +157,7 @@ public class addAluno extends JDialog {
         CP1 = new JTextField();       
         CP1.addFocusListener(new FocusAdapter() {
         	public void focusGained(FocusEvent e) {
-        		 CP1.setText(" "); 
+        		 CP1.setText(""); 
         	}
         	public void focusLost(FocusEvent e) {
                 CP1.setText("Digite aqui..."); 
@@ -169,7 +171,7 @@ public class addAluno extends JDialog {
         CP2 = new JTextField();
         CP2.addFocusListener(new FocusAdapter() {
         	public void focusGained(FocusEvent e) {
-        		 CP2.setText(" "); 
+        		 CP2.setText(""); 
         	}
         	public void focusLost(FocusEvent e) {
                 CP2.setText("Digite aqui..."); 
@@ -183,7 +185,7 @@ public class addAluno extends JDialog {
         CP3 = new JTextField();
         CP3.addFocusListener(new FocusAdapter() {
         	public void focusGained(FocusEvent e) {
-        		 CP3.setText(" "); 
+        		 CP3.setText(""); 
         	}
         	public void focusLost(FocusEvent e) {
                 CP3.setText("Digite aqui..."); 

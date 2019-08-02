@@ -7,6 +7,4 @@ public abstract class Bacharelado implements Materia {
 	private String livrepos[] = new String[20];
 
 	//receber dados do banco de dados, talvez a classe n�o seja abstrata
-	
-
 }

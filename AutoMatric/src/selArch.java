@@ -7,6 +7,8 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -52,7 +54,10 @@ public class selArch extends JDialog {
         JButton btnStud = new JButton("...");
         btnStud.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-              JFileChooser file = new JFileChooser(); 
+              JFileChooser file = new JFileChooser();
+              String[] csv = {"csv"};
+              FileFilter filtro = new FileNameExtensionFilter("CSV file", csv);
+              file.setFileFilter(filtro);
               file.setFileSelectionMode(JFileChooser.FILES_ONLY);
               int i= file.showSaveDialog(null);
               if (i!=1){
@@ -67,7 +72,10 @@ public class selArch extends JDialog {
         JButton btnSub = new JButton("...");
         btnSub.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                JFileChooser file = new JFileChooser(); 
+                JFileChooser file = new JFileChooser();
+                String[] csv = {"csv"};
+                FileFilter filtro = new FileNameExtensionFilter("CSV file", csv);
+                file.setFileFilter(filtro);
                 file.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 int i= file.showSaveDialog(null);
                 if (i!=1){
@@ -81,7 +89,10 @@ public class selArch extends JDialog {
         JButton btnOfer = new JButton("...");
         btnOfer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                JFileChooser file = new JFileChooser(); 
+                JFileChooser file = new JFileChooser();
+                String[] csv = {"csv"};
+                FileFilter filtro = new FileNameExtensionFilter("CSV file", csv);
+                file.setFileFilter(filtro);
                 file.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 int i= file.showSaveDialog(null);
                 if (i!=1){
@@ -95,7 +106,10 @@ public class selArch extends JDialog {
         JButton btnMatr = new JButton("...");
         btnMatr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                JFileChooser file = new JFileChooser(); 
+                JFileChooser file = new JFileChooser();
+                String[] csv = {"csv"};
+                FileFilter filtro = new FileNameExtensionFilter("CSV file", csv);
+                file.setFileFilter(filtro);
                 file.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 int i= file.showSaveDialog(null);
                 if (i!=1){
