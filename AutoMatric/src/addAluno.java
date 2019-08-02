@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import sistema.*;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
@@ -20,9 +19,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 
 public class addAluno extends JDialog {
     private static final long serialVersionUID = 1L;
@@ -161,7 +157,7 @@ public class addAluno extends JDialog {
         CP1 = new JTextField();       
         CP1.addFocusListener(new FocusAdapter() {
         	public void focusGained(FocusEvent e) {
-        		 CP1.setText(" "); 
+        		 CP1.setText(""); 
         	}
         	public void focusLost(FocusEvent e) {
                 CP1.setText("Digite aqui..."); 
@@ -175,7 +171,7 @@ public class addAluno extends JDialog {
         CP2 = new JTextField();
         CP2.addFocusListener(new FocusAdapter() {
         	public void focusGained(FocusEvent e) {
-        		 CP2.setText(" "); 
+        		 CP2.setText(""); 
         	}
         	public void focusLost(FocusEvent e) {
                 CP2.setText("Digite aqui..."); 
@@ -189,7 +185,7 @@ public class addAluno extends JDialog {
         CP3 = new JTextField();
         CP3.addFocusListener(new FocusAdapter() {
         	public void focusGained(FocusEvent e) {
-        		 CP3.setText(" "); 
+        		 CP3.setText(""); 
         	}
         	public void focusLost(FocusEvent e) {
                 CP3.setText("Digite aqui..."); 
