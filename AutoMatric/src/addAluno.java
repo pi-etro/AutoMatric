@@ -19,13 +19,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-<<<<<<< HEAD
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JRadioButton;
 
-=======
->>>>>>> refs/remotes/origin/master
 
 public class addAluno extends JDialog {
     private static final long serialVersionUID = 1L;

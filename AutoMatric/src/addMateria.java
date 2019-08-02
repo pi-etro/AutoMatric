@@ -23,7 +23,7 @@ public class addMateria extends JDialog {
     private JTextField nome;
 
     public addMateria() {
-        setTitle("Adicionar matéria");
+        setTitle("Adicionar materia");
         setResizable(false);
         setForeground(Color.LIGHT_GRAY);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
