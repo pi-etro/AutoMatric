@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import java.awt.SystemColor;
@@ -32,6 +33,8 @@ public class addAluno extends JDialog {
     private JTextField CP1;
     private JTextField CP2;
     private JTextField CP3;
+    private ButtonGroup posBI = new ButtonGroup();
+
 
     public addAluno() {
         setTitle("Adicionar Aluno");
@@ -110,10 +113,8 @@ public class addAluno extends JDialog {
         JLabel posbiLabel = new JLabel("P\u00F3s Bacharelado");
         posbiLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
         posbiLabel.setBounds(25, 144, 139, 16);
-        contentPanel.add(posbiLabel);
-               
+        contentPanel.add(posbiLabel);         
        
-        
         JLabel umLabel = new JLabel("1. ");
         umLabel.setBounds(25, 173, 56, 16);
         contentPanel.add(umLabel);
@@ -193,31 +194,17 @@ public class addAluno extends JDialog {
         CP3.setBounds(409, 228, 74, 22);
         contentPanel.add(CP3);
         
-        final JRadioButton naobirb = new JRadioButton("Nao");        
+        JRadioButton naobirb = new JRadioButton("Nao");        
         naobirb.setBounds(250, 139, 56, 23);
         contentPanel.add(naobirb);
         
-        final JRadioButton simbirb = new JRadioButton("Sim");
+        JRadioButton simbirb = new JRadioButton("Sim");
         simbirb.setBounds(170, 139, 56, 23);
-        contentPanel.add(simbirb);
+        contentPanel.add(simbirb);   
         
-        naobirb.addMouseListener(new MouseAdapter() {
-        	public void mouseClicked(MouseEvent e) {
-        		if(naobirb.isSelected())
-        	{
-        		simbirb.setSelected(false);
-        		}
-        	}
-        });
-        
-        simbirb.addMouseListener(new MouseAdapter() {
-        	public void mouseClicked(MouseEvent e) {
-        		if(simbirb.isSelected())
-        	{
-        		naobirb.setSelected(false);
-        		}
-        	}
-        });
+        posBI.add(simbirb);
+        posBI.add(naobirb);
+       
                
         
         // OK Cancel
