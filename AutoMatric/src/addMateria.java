@@ -34,7 +34,6 @@ public class addMateria extends JDialog {
         setForeground(Color.LIGHT_GRAY);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setBackground(Color.DARK_GRAY);
-        setAlwaysOnTop(true);
         setBounds(100, 100, 500, 350);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

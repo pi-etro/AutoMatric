@@ -1,13 +1,18 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -34,15 +39,16 @@ public class addAluno extends JDialog {
     private JTextField CP2;
     private JTextField CP3;
     private ButtonGroup posBI = new ButtonGroup();
+	private static String arquivo = "temp1.csv";
 
 
     public addAluno() {
         setTitle("Adicionar Aluno");
         setResizable(false);
+        setDragable(true);
         setForeground(Color.LIGHT_GRAY);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setBackground(Color.DARK_GRAY);
-        setAlwaysOnTop(true);
         setBounds(100, 100, 500, 350);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,15 +65,8 @@ public class addAluno extends JDialog {
         contentPanel.add(raLabel);
         
         ra = new JTextField();
-        ra.addFocusListener(new FocusAdapter() {
-        	public void focusGained(FocusEvent e) {
-        		 ra.setText(""); 
-        	}
-        	public void focusLost(FocusEvent e) {
-                ra.setText("Digite aqui..."); 
-        	}
-        });
         ra.setText("Digite aqui...");
+        ra.getText();
         ra.setBounds(48, 38, 116, 22);
         contentPanel.add(ra);
         ra.setColumns(10);
@@ -77,15 +76,8 @@ public class addAluno extends JDialog {
         contentPanel.add(crLabel);
         
         cr = new JTextField();
-        cr.addFocusListener(new FocusAdapter() {
-        	public void focusGained(FocusEvent e) {
-        		 cr.setText(""); 
-        	}
-        	public void focusLost(FocusEvent e) {
-                cr.setText("Digite aqui..."); 
-        	}
-        });
         cr.setText("Digite aqui...");
+        cr.getText();
         cr.setBounds(48, 67, 116, 22);
         contentPanel.add(cr);
         cr.setColumns(10);
@@ -94,7 +86,7 @@ public class addAluno extends JDialog {
         turnoLabel.setBounds(236, 41, 56, 16);
         contentPanel.add(turnoLabel);
         
-        JComboBox turnoBox = new JComboBox();
+        final JComboBox turnoBox = new JComboBox();
         turnoBox.setBackground(SystemColor.inactiveCaptionBorder);
         turnoBox.setModel(new DefaultComboBoxModel(new String[] {"Diurno", "Noturno"}));
         turnoBox.setBounds(285, 38, 116, 22);
@@ -104,7 +96,7 @@ public class addAluno extends JDialog {
         biLabel.setBounds(236, 70, 56, 16);
         contentPanel.add(biLabel);
         
-        JComboBox biBox = new JComboBox();
+        final JComboBox biBox = new JComboBox();
         biBox.setBackground(SystemColor.inactiveCaptionBorder);
         biBox.setModel(new DefaultComboBoxModel(new String[] {"BCT", "BCH"}));
         biBox.setBounds(285, 70, 116, 22);
@@ -127,23 +119,22 @@ public class addAluno extends JDialog {
         tresLabel.setBounds(25, 231, 56, 16);
         contentPanel.add(tresLabel);
         
-        JComboBox curso1Box = new JComboBox();
+        final JComboBox curso1Box = new JComboBox();
         curso1Box.setBackground(SystemColor.inactiveCaptionBorder);
-        curso1Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o", "Engenharia de Informa\u00E7\u00E3o"}));
+        curso1Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ciencia da Computacao", "Engenharia de Informacao"}));
         curso1Box.setBounds(48, 170, 353, 22);
         contentPanel.add(curso1Box);
         
-        JComboBox curso2Box = new JComboBox();
+        final JComboBox curso2Box = new JComboBox();
         curso2Box.setBackground(SystemColor.inactiveCaptionBorder);
-        curso2Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o", "Engenharia de Informa\u00E7\u00E3o"}));
+        curso2Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ciencia da Computacao", "Engenharia de Informacao"}));
         curso2Box.setBounds(48, 199, 353, 22);
         contentPanel.add(curso2Box);
         
-        JComboBox curso3Box = new JComboBox();
+        final JComboBox curso3Box = new JComboBox();
         curso3Box.setEnabled(false);
-        curso3Box.setEditable(true);
         curso3Box.setBackground(Color.LIGHT_GRAY);
-        curso3Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ci\u00EAncia da Computa\u00E7\u00E3o", "Engenharia de Informa\u00E7\u00E3o"}));
+        curso3Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ciencia da Computacao", "Engenharia de Informacao"}));
         curso3Box.setBounds(48, 228, 353, 22);
         contentPanel.add(curso3Box);
         
@@ -152,53 +143,33 @@ public class addAluno extends JDialog {
         cpLabel.setBounds(418, 142, 56, 16);
         contentPanel.add(cpLabel);
         
-        CP1 = new JTextField();       
-        CP1.addFocusListener(new FocusAdapter() {
-        	public void focusGained(FocusEvent e) {
-        		 CP1.setText(""); 
-        	}
-        	public void focusLost(FocusEvent e) {
-                CP1.setText("Digite aqui..."); 
-        	}
-        });
-        CP1.setText("Digite aqui...");       
+        CP1 = new JTextField();     
+        CP1.setText("Digite aqui..."); 
+        CP1.getText();
         CP1.setColumns(10);
         CP1.setBounds(409, 170, 74, 22);
         contentPanel.add(CP1);     
         
-        CP2 = new JTextField();
-        CP2.addFocusListener(new FocusAdapter() {
-        	public void focusGained(FocusEvent e) {
-        		 CP2.setText(""); 
-        	}
-        	public void focusLost(FocusEvent e) {
-                CP2.setText("Digite aqui..."); 
-        	}
-        });
+        CP2 = new JTextField(); 	
         CP2.setText("Digite aqui...");
+        CP2.getText();
         CP2.setColumns(10);
         CP2.setBounds(409, 199, 74, 22);
         contentPanel.add(CP2);
         
         CP3 = new JTextField();
-        CP3.addFocusListener(new FocusAdapter() {
-        	public void focusGained(FocusEvent e) {
-        		 CP3.setText(""); 
-        	}
-        	public void focusLost(FocusEvent e) {
-                CP3.setText("Digite aqui..."); 
-        	}
-        });
+        CP3.setEnabled(false);
+        CP3.setEditable(false);       
         CP3.setText("Digite aqui...");
         CP3.setColumns(10);
         CP3.setBounds(409, 228, 74, 22);
         contentPanel.add(CP3);
         
-        JRadioButton naobirb = new JRadioButton("Nao");        
+        final JRadioButton naobirb = new JRadioButton("Nao");        
         naobirb.setBounds(250, 139, 56, 23);
         contentPanel.add(naobirb);
         
-        JRadioButton simbirb = new JRadioButton("Sim");
+        final JRadioButton simbirb = new JRadioButton("Sim");
         simbirb.setBounds(170, 139, 56, 23);
         contentPanel.add(simbirb);   
         
@@ -216,6 +187,51 @@ public class addAluno extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
+                    	// The name of the file to open.
+                    	 String fileName = arquivo;    
+                         try {
+                             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(arquivo, true));
+                             // Note that write() does not automatically
+                             // append a newline character.
+                             bufferedWriter.write(ra.getText() + ";");
+                             bufferedWriter.write(cr.getText() + ";");   
+                             
+                             //verificar turno
+                             if(turnoBox.getSelectedItem().toString().equals("Diurno")) 
+                            	 bufferedWriter.write("Diurno" + ";");                            	 
+                             else
+                                 bufferedWriter.write("Noturno" + ";");
+                            
+                             //verificar BI
+                            if(biBox.getSelectedItem().toString().equals("BCT"))
+                            	 bufferedWriter.write("BCT" + ";");    
+                            else
+                            	 bufferedWriter.write("BCH" + ";");
+                            
+                             //verificar pos BI - 1
+                             if(curso1Box.getSelectedItem().toString().equals("Bacharelado em Ciencia da Computacao"))
+                            	 bufferedWriter.write("Bacharelado em Ciencia da Computacao" + ";");    
+                             else
+                            	 bufferedWriter.write("Engenharia de Informacao" + ";");
+                             
+                             bufferedWriter.write(CP1.getText() + ";");
+                             
+                             //verificar pos BI - 2
+                             if(curso2Box.getSelectedItem().toString().equals("Bacharelado em Ciencia da Computacao"))
+                            	 bufferedWriter.write("Bacharelado em Ciencia da Computacao" + ";");    
+                             else
+                            	 bufferedWriter.write("Engenharia de Informacao" + ";");
+                             
+                             bufferedWriter.write(CP2.getText() + ";");    
+                             
+                             bufferedWriter.newLine();
+                             bufferedWriter.close();
+                             JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
+                         }
+                         catch(IOException ex) {
+                             System.out.println( "Error writing to file '" + fileName + "'");
+                         }
+
                         
                         // passar dados ao menu !
                         
@@ -249,4 +265,10 @@ public class addAluno extends JDialog {
         //centralizar
         setLocationRelativeTo(null);
     }
+
+
+	private void setDragable(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 }

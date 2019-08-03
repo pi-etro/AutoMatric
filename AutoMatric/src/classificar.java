@@ -3,8 +3,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -18,7 +16,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.DropMode;
 
 public class classificar extends JDialog {
     private static final long serialVersionUID = 1L;
@@ -126,9 +123,9 @@ public class classificar extends JDialog {
     }
 
 	private void setDragable(boolean b) {
-		// TODO Auto-generated method stub
 		
 	}
+
 
 	
 }
