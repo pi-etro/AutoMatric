@@ -30,9 +30,10 @@ public class addMateria extends JDialog {
     private final JPanel contentPanel = new JPanel();
     private JTextField codigo;
     private JTextField nome;
-    private ButtonGroup obrigatorias = new ButtonGroup();
-    private ButtonGroup limitadas = new ButtonGroup();
-    private ButtonGroup livres = new ButtonGroup();
+    //private ButtonGroup obrigatorias = new ButtonGroup();
+    private ButtonGroup colBcc = new ButtonGroup();
+    private ButtonGroup colBct = new ButtonGroup();
+    private ButtonGroup colInfo = new ButtonGroup();
 	private static String arquivo = "cadastroMaterias.csv";
 
     public addMateria() {
@@ -141,29 +142,97 @@ public class addMateria extends JDialog {
                              bufferedWriter.write(codigo.getText() + ";");
                              bufferedWriter.write(nome.getText() + ";");   
                              
-                             //verificar obrigatoria
+                             //verificar obrigatoria - selecionar apenas uma opção
+                             if(!obrigBct.isSelected() && !obrigBcc.isSelected() && !obrigInfo.isSelected()) //nenhum selecionado
+                    			JOptionPane.showMessageDialog(null, "Selecione ao menos uma opção obrigatória!");
+                             else {
                              if(obrigBct.isSelected()) 
                             	 bufferedWriter.write("SIM" + ";"+"-"+";"+"-"+";");                            	 
                              else if(obrigBcc.isSelected())
                                  bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
                              else
-                                 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");                            	 
+                                 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");
+                             }
                             
-                             //verificar limitada
-                             if(limBct.isSelected()) 
-                            	 bufferedWriter.write("SIM" + ";"+"-"+";"+"-"+";");                             	 
-                             else if(limBcc.isSelected())
-                            	 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
-                             else
-                            	 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");  
+                             //verificar limitada - mais de uma possibilidade, mas excluir a escolha de limitada quando a mesma obrgatoria for selecionada
+                             if(!limBct.isSelected() && !limBcc.isSelected() && !limInfo.isSelected()) //nenhum selecionado
+                    			 bufferedWriter.write("-"+";" +"-"+ ";" + "-"+";"); 
+                             else {
+                             if(obrigBct.isSelected()) { 
+                            		 if(limBcc.isSelected() && limInfo.isSelected())
+                            	 bufferedWriter.write("-" + ";"+"SIM"+";"+"SIM"+";");  
+                            		 else if(limBcc.isSelected() || limInfo.isSelected()) { 
+                            			 if(limBcc.isSelected()) {
+                            				 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
+                            			 }else {
+                                        	 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";"); 
+                            			 }
+                            		 }  
+                             }
+                             if(obrigBcc.isSelected()) {
+                            	 if(limBct.isSelected() && limInfo.isSelected())
+                            		 bufferedWriter.write("SIM" + ";"+"-"+";"+"SIM"+";");
+                            	 else if(limBct.isSelected() || limInfo.isSelected()) {
+                            		 if(limBct.isSelected()) {
+                            			 bufferedWriter.write("SIM"+";"+"-"+";"+"-"+";");
+                            			 }else {
+                            				 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");
+                            				 }
+                            		 } 
+                             } if(obrigInfo.isSelected()) {
+                            	 if(limBct.isSelected() && limBcc.isSelected())
+                            		 bufferedWriter.write("SIM" + ";"+"SIM"+";"+"-"+";");
+                            	 else if(limBct.isSelected() || limBcc.isSelected()) {
+                            		 if(limBct.isSelected()) {
+                            			 bufferedWriter.write("SIM"+";"+"-"+";"+"-"+";");
+                            			 }else {
+                            				 bufferedWriter.write("-"+";" +"SIM"+ ";" + "-"+";");
+                            				 }
+                            		 } 
+                             }
+                             }
                             
-                             //verificar livre
-                             if(livreBct.isSelected()) 
-                            	 bufferedWriter.write("SIM" + ";"+"-"+";"+"-"+";");                            	 
-                             if(livreBcc.isSelected())
-                            	 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
-                             else
-                            	 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");  
+                           //verificar livre - mais de uma possibilidade, mas excluir a escolha de livre quando a mesma obrigatoria OU limitada for selecionada
+                             if(!livreBct.isSelected() && !livreBcc.isSelected() && !livreInfo.isSelected()) //nenhum selecionado
+                    			 bufferedWriter.write("-"+";" +"-"+ ";" + "-"+";"); 
+                           //pelo menos um selecionado
+                             else{		
+                             if(obrigBct.isSelected() || limBct.isSelected()) { 
+                            		 if(livreBcc.isSelected() && livreInfo.isSelected())
+                            	 bufferedWriter.write("-" + ";"+"SIM"+";"+"SIM"+";");  
+                            		 if(livreBcc.isSelected() || livreInfo.isSelected()) { 
+                            			 if(livreBcc.isSelected()) 
+                            				 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
+                            			 else if(livreInfo.isSelected())
+                                        	 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";"); 
+                            			 else
+                            				 bufferedWriter.write("-"+";" +"-"+ ";" + "-"+";"); 
+                            		 }  
+                             }
+                             if(obrigBcc.isSelected() || limBcc.isSelected() ) {
+                            	 if(livreBct.isSelected() && livreInfo.isSelected())
+                            		 bufferedWriter.write("SIM" + ";"+"-"+";"+"SIM"+";");
+                            	 if(livreBct.isSelected() || livreInfo.isSelected()) {
+                            		 if(livreBct.isSelected()) 
+                            			 bufferedWriter.write("SIM"+";"+"-"+";"+"-"+";");
+                            		 else if (livreInfo.isSelected())
+                            			 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");
+                            		 else
+                            			 bufferedWriter.write("-"+";" +"-"+ ";" + "-"+";"); 
+                            		 } 
+                             } if(obrigInfo.isSelected()|| limInfo.isSelected()) {
+                            	 if(livreBct.isSelected() && livreBcc.isSelected())
+                            		 bufferedWriter.write("SIM" + ";"+"SIM"+";"+"-"+";");
+                            	 if(livreBct.isSelected() || livreBcc.isSelected()) {
+                            		 if(livreBct.isSelected())
+                            			 bufferedWriter.write("SIM"+";"+"-"+";"+"-"+";");
+                            		 else if(livreBcc.isSelected())
+                            			 bufferedWriter.write("-"+";" +"SIM"+ ";" + "-"+";");
+                            		 else
+                            			 bufferedWriter.write("-"+";" +"-"+ ";" + "-"+";"); 
+                            		 } 
+                             }
+                             }
                              
                              
                              bufferedWriter.newLine();
@@ -196,18 +265,17 @@ public class addMateria extends JDialog {
                 buttonPane.add(cancelButton);
             }
             
-            //adicionar ao ButtonList obrigatoria os radioButton respectivos           
-            obrigatorias.add(obrigBct);            
-            obrigatorias.add(obrigBcc);           
-            obrigatorias.add(obrigInfo);
-          //adicionar ao ButtonList limitada os radioButton respectivos
-            limitadas.add(limBct);            
-            limitadas.add(limBcc);           
-            limitadas.add(limInfo);
-          //adicionar ao ButtonList livres os radioButton respectivos
-            livres.add(livreBct);            
-            livres.add(livreBcc);           
-            livres.add(livreInfo);
+            //selecionar apenas uma opção nas colunas
+            colBct.add(obrigBct);
+            colBct.add(limBct);
+            colBct.add(livreBct);
+            colBcc.add(obrigBcc);
+            colBcc.add(limBcc);
+            colBcc.add(livreBcc);
+            colInfo.add(obrigInfo);
+            colInfo.add(limInfo);
+            colInfo.add(livreInfo);
+         
         }
         
         //icone do programa
