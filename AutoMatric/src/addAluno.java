@@ -1,16 +1,16 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import com.opencsv.CSVWriter;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -18,15 +18,12 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 
 
@@ -39,13 +36,13 @@ public class addAluno extends JDialog {
     private JTextField CP2;
     private JTextField CP3;
     private ButtonGroup posBI = new ButtonGroup();
-	private static String arquivo = "cadastroAluno.csv";
-
 
     public addAluno() {
+        ArrayList agenda = new ArrayList();
+        agenda.add("a");
+        agenda.add("b");
         setTitle("Adicionar Aluno");
         setResizable(false);
-        setDragable(true);
         setForeground(Color.LIGHT_GRAY);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setBackground(Color.DARK_GRAY);
@@ -65,6 +62,14 @@ public class addAluno extends JDialog {
         contentPanel.add(raLabel);
         
         ra = new JTextField();
+        ra.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(ra.getText().equals("Digite aqui...")) ra.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(ra.getText().equals("")) ra.setText("Digite aqui...");
+            }
+        });
         ra.setText("Digite aqui...");
         ra.getText();
         ra.setBounds(48, 38, 116, 22);
@@ -76,6 +81,14 @@ public class addAluno extends JDialog {
         contentPanel.add(crLabel);
         
         cr = new JTextField();
+        cr.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(cr.getText().equals("Digite aqui...")) cr.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(cr.getText().equals("")) cr.setText("Digite aqui...");
+            }
+        });
         cr.setText("Digite aqui...");
         cr.getText();
         cr.setBounds(48, 67, 116, 22);
@@ -105,7 +118,18 @@ public class addAluno extends JDialog {
         JLabel posbiLabel = new JLabel("P\u00F3s Bacharelado");
         posbiLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
         posbiLabel.setBounds(25, 144, 139, 16);
-        contentPanel.add(posbiLabel);         
+        contentPanel.add(posbiLabel);
+        
+        final JRadioButton naobirb = new JRadioButton("Nao");        
+        naobirb.setBounds(250, 139, 56, 23);
+        contentPanel.add(naobirb);
+        
+        final JRadioButton simbirb = new JRadioButton("Sim");
+        simbirb.setBounds(170, 139, 56, 23);
+        contentPanel.add(simbirb);   
+        
+        posBI.add(simbirb);
+        posBI.add(naobirb);
        
         JLabel umLabel = new JLabel("1. ");
         umLabel.setBounds(25, 173, 56, 16);
@@ -132,8 +156,7 @@ public class addAluno extends JDialog {
         contentPanel.add(curso2Box);
         
         final JComboBox curso3Box = new JComboBox();
-        curso3Box.setEnabled(false);
-        curso3Box.setBackground(Color.LIGHT_GRAY);
+        curso3Box.setBackground(SystemColor.inactiveCaptionBorder);
         curso3Box.setModel(new DefaultComboBoxModel(new String[] {"-", "Bacharelado em Ciencia da Computacao", "Engenharia de Informacao"}));
         curso3Box.setBounds(48, 228, 353, 22);
         contentPanel.add(curso3Box);
@@ -143,14 +166,30 @@ public class addAluno extends JDialog {
         cpLabel.setBounds(418, 142, 56, 16);
         contentPanel.add(cpLabel);
         
-        CP1 = new JTextField();     
+        CP1 = new JTextField();
+        CP1.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(CP1.getText().equals("Digite aqui...")) CP1.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(CP1.getText().equals("")) CP1.setText("Digite aqui...");
+            }
+        });
         CP1.setText("Digite aqui..."); 
         CP1.getText();
         CP1.setColumns(10);
         CP1.setBounds(409, 170, 74, 22);
         contentPanel.add(CP1);     
         
-        CP2 = new JTextField(); 	
+        CP2 = new JTextField();
+        CP2.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(CP2.getText().equals("Digite aqui...")) CP2.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(CP2.getText().equals("")) CP2.setText("Digite aqui...");
+            }
+        });
         CP2.setText("Digite aqui...");
         CP2.getText();
         CP2.setColumns(10);
@@ -158,26 +197,19 @@ public class addAluno extends JDialog {
         contentPanel.add(CP2);
         
         CP3 = new JTextField();
-        CP3.setEnabled(false);
-        CP3.setEditable(false);       
+        CP3.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(CP3.getText().equals("Digite aqui...")) CP3.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(CP3.getText().equals("")) CP3.setText("Digite aqui...");
+            }
+        });
         CP3.setText("Digite aqui...");
         CP3.setColumns(10);
         CP3.setBounds(409, 228, 74, 22);
         contentPanel.add(CP3);
-        
-        final JRadioButton naobirb = new JRadioButton("Nao");        
-        naobirb.setBounds(250, 139, 56, 23);
-        contentPanel.add(naobirb);
-        
-        final JRadioButton simbirb = new JRadioButton("Sim");
-        simbirb.setBounds(170, 139, 56, 23);
-        contentPanel.add(simbirb);   
-        
-        posBI.add(simbirb);
-        posBI.add(naobirb);
        
-               
-        
         // OK Cancel
         {
             JPanel buttonPane = new JPanel();
@@ -187,56 +219,73 @@ public class addAluno extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                    	// The name of the file to open.
-                    	 String fileName = arquivo;    
                          try {
-                             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(arquivo, true));
-                             // Note that write() does not automatically
-                             // append a newline character.
-                             bufferedWriter.write(ra.getText() + ";");
-                             bufferedWriter.write(cr.getText() + ";");   
-                             
-                             //verificar turno
-                             if(turnoBox.getSelectedItem().toString().equals("Diurno")) 
-                            	 bufferedWriter.write("Diurno" + ";");                            	 
-                             else
-                                 bufferedWriter.write("Noturno" + ";");
-                            
-                             //verificar BI
-                            if(biBox.getSelectedItem().toString().equals("BCT"))
-                            	 bufferedWriter.write("BCT" + ";");    
-                            else
-                            	 bufferedWriter.write("BCH" + ";");
-                            
-                             //verificar pos BI - 1
-                             if(curso1Box.getSelectedItem().toString().equals("Bacharelado em Ciencia da Computacao"))
-                            	 bufferedWriter.write("Bacharelado em Ciencia da Computacao" + ";");    
-                             else
-                            	 bufferedWriter.write("Engenharia de Informacao" + ";");
-                             
-                             bufferedWriter.write(CP1.getText() + ";");
-                             
-                             //verificar pos BI - 2
-                             if(curso2Box.getSelectedItem().toString().equals("Bacharelado em Ciencia da Computacao"))
-                            	 bufferedWriter.write("Bacharelado em Ciencia da Computacao" + ";");    
-                             else
-                            	 bufferedWriter.write("Engenharia de Informacao" + ";");
-                             
-                             bufferedWriter.write(CP2.getText() + ";");    
-                             
-                             bufferedWriter.newLine();
-                             bufferedWriter.close();
-                             JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
+                             if(ra.getText().equals("Digite aqui...")) {
+                                 JOptionPane.showMessageDialog(null, "RA não digitado!");
+                             }
+                             else if(cr.getText().equals("Digite aqui...")) {
+                                 JOptionPane.showMessageDialog(null, "CP não digitado!");
+                             }
+                             else if(!simbirb.isSelected() && !naobirb.isSelected()) {
+                                 JOptionPane.showMessageDialog(null, "Aluno possui pos bacharelado?");
+                             }
+                             else if(!curso1Box.getSelectedItem().toString().equals("-") &&  CP1.getText().equals("Digite aqui...")) {
+                                 JOptionPane.showMessageDialog(null, "CP do curso 1 está faltando!");
+                             }
+                             else if(!curso2Box.getSelectedItem().toString().equals("-") &&  CP2.getText().equals("Digite aqui...")) {
+                                 JOptionPane.showMessageDialog(null, "CP do curso 2 está faltando!");
+                             }
+                             else if(!curso3Box.getSelectedItem().toString().equals("-") &&  CP3.getText().equals("Digite aqui...")) {
+                                 JOptionPane.showMessageDialog(null, "CP do curso 3 está faltando!");
+                             }
+                             else {
+//                                 BufferedWriter escr = new BufferedWriter(new FileWriter(menu.getCsvAluno(), true));
+//                                 escr.write(ra.getText() + ";");
+//                                 escr.write(cr.getText() + ";");
+//                                 escr.write(turnoBox.getSelectedItem().toString() + ";");
+//                                 escr.write(biBox.getSelectedItem().toString() + ";");
+//                                 if(simbirb.isSelected()) escr.write("true;");
+//                                 else escr.write("false;");
+//                                 escr.write(curso1Box.getSelectedItem().toString() + ";");
+//                                 escr.write(CP1.getText() + ";");
+//                                 escr.write(curso2Box.getSelectedItem().toString() + ";");
+//                                 escr.write(CP2.getText() + ";");
+//                                 escr.write(curso3Box.getSelectedItem().toString() + ";");
+//                                 escr.write(CP3.getText() + ";");
+//                                 escr.newLine();
+//                                 escr.close();
+                                 
+                                 String[] aluno = new String[11];
+                                 aluno[0] = ra.getText();
+                                 aluno[1] = cr.getText();
+                                 aluno[2] = turnoBox.getSelectedItem().toString();
+                                 aluno[3] = biBox.getSelectedItem().toString();
+                                 if(simbirb.isSelected()) aluno[4] = "true";
+                                 else aluno[4] = "false";
+                                 aluno[5] = curso1Box.getSelectedItem().toString();
+                                 if(aluno[5].equals("-")) aluno[6] = "0";
+                                 else aluno[6] = CP1.getText();;
+                                 aluno[7] = curso1Box.getSelectedItem().toString();
+                                 if(aluno[7].equals("-")) aluno[8] = "0";
+                                 else aluno[8] = CP2.getText();
+                                 aluno[9] = curso1Box.getSelectedItem().toString();
+                                 if(aluno[9].equals("-")) aluno[10] = "0";
+                                 else aluno[10] = CP3.getText();;
+                                 
+                                 CSVWriter escr = new CSVWriter(new FileWriter(menu.getCsvAluno(), true));
+                                 escr.writeNext(aluno);
+                                 escr.close();
+                                 JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
+                                 new menu().setVisible(true);
+                                 dispose();
+                             }
                          }
                          catch(IOException ex) {
-                             System.out.println( "Error writing to file '" + fileName + "'");
+                             JOptionPane.showMessageDialog(null, "Erro na escrita do arquivo!");
                          }
-
-                        
-                        // passar dados ao menu !
-                        
-                        new menu().setVisible(true);
-                        dispose();
+                         catch(NullPointerException e) {
+                             JOptionPane.showMessageDialog(null, "Arquivo do Banco de Alunos não selecionado!");
+                         }
                     }
                 });
                 okButton.setActionCommand("OK");
@@ -255,7 +304,6 @@ public class addAluno extends JDialog {
                 buttonPane.add(cancelButton);
             }
         }
-        
         //icone do programa
         try {
             super.setIconImage(ImageIO.read(new File("img/icon.png")));
@@ -265,10 +313,4 @@ public class addAluno extends JDialog {
         //centralizar
         setLocationRelativeTo(null);
     }
-
-
-	private void setDragable(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
 }
