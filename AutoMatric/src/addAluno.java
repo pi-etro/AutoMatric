@@ -39,7 +39,7 @@ public class addAluno extends JDialog {
     private JTextField CP2;
     private JTextField CP3;
     private ButtonGroup posBI = new ButtonGroup();
-	private static String arquivo = "temp1.csv";
+	private static String arquivo = "cadastroAluno.csv";
 
 
     public addAluno() {

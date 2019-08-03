@@ -1,7 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -15,6 +19,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -27,6 +33,7 @@ public class addMateria extends JDialog {
     private ButtonGroup obrigatorias = new ButtonGroup();
     private ButtonGroup limitadas = new ButtonGroup();
     private ButtonGroup livres = new ButtonGroup();
+	private static String arquivo = "cadastroMaterias.csv";
 
     public addMateria() {
         setTitle("Adicionar materia");
@@ -50,14 +57,6 @@ public class addMateria extends JDialog {
         contentPanel.add(codLabel);
         
         codigo = new JTextField();
-        codigo.addFocusListener(new FocusAdapter() {
-        	public void focusGained(FocusEvent e) {
-        		 codigo.setText(" "); 
-        	}
-        	public void focusLost(FocusEvent e) {
-                codigo.setText("Digite aqui..."); 
-        	}
-        });
         codigo.setText("Digite aqui...");
         codigo.setBounds(80, 39, 80, 22);
         contentPanel.add(codigo);
@@ -68,14 +67,6 @@ public class addMateria extends JDialog {
         contentPanel.add(nomeLabel);
         
         nome = new JTextField();
-        nome.addFocusListener(new FocusAdapter() {
-        	public void focusGained(FocusEvent e) {
-        		 nome.setText(" "); 
-        	}
-        	public void focusLost(FocusEvent e) {
-                nome.setText("Digite aqui..."); 
-        	}
-        });
         nome.setText("Digite aqui...");
         nome.setColumns(10);
         nome.setBounds(80, 71, 326, 22);
@@ -96,39 +87,39 @@ public class addMateria extends JDialog {
         livreLabel.setBounds(12, 199, 134, 16);
         contentPanel.add(livreLabel);
         
-        JRadioButton obrigBct = new JRadioButton("BCT");
+        final JRadioButton obrigBct = new JRadioButton("BCT");
         obrigBct.setBounds(134, 111, 56, 24);
         contentPanel.add(obrigBct);
         
-        JRadioButton obrigBcc = new JRadioButton("BCC");
+        final JRadioButton obrigBcc = new JRadioButton("BCC");
         obrigBcc.setBounds(194, 111, 56, 24);
         contentPanel.add(obrigBcc);
         
-        JRadioButton obrigInfo = new JRadioButton("INFO");
+        final JRadioButton obrigInfo = new JRadioButton("INFO");
         obrigInfo.setBounds(254, 111, 56, 24);
         contentPanel.add(obrigInfo);
         
-        JRadioButton limBct = new JRadioButton("BCT");
+        final JRadioButton limBct = new JRadioButton("BCT");
         limBct.setBounds(134, 153, 56, 24);
         contentPanel.add(limBct);
         
-        JRadioButton limBcc = new JRadioButton("BCC");
+        final JRadioButton limBcc = new JRadioButton("BCC");
         limBcc.setBounds(194, 153, 56, 24);
         contentPanel.add(limBcc);
         
-        JRadioButton limInfo = new JRadioButton("INFO");
+        final JRadioButton limInfo = new JRadioButton("INFO");
         limInfo.setBounds(254, 153, 56, 24);
         contentPanel.add(limInfo);
         
-        JRadioButton livreBct = new JRadioButton("BCT");
+        final JRadioButton livreBct = new JRadioButton("BCT");
         livreBct.setBounds(134, 195, 56, 24);
         contentPanel.add(livreBct);
         
-        JRadioButton livreBcc = new JRadioButton("BCC");
+        final JRadioButton livreBcc = new JRadioButton("BCC");
         livreBcc.setBounds(194, 195, 56, 24);
         contentPanel.add(livreBcc);
         
-        JRadioButton livreInfo = new JRadioButton("INFO");
+        final JRadioButton livreInfo = new JRadioButton("INFO");
         livreInfo.setBounds(254, 195, 56, 24);
         contentPanel.add(livreInfo);
        
@@ -142,6 +133,46 @@ public class addMateria extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
+                    	 String fileName = arquivo;    
+                         try {
+                             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(arquivo, true));
+                             // Note that write() does not automatically
+                             // append a newline character.
+                             bufferedWriter.write(codigo.getText() + ";");
+                             bufferedWriter.write(nome.getText() + ";");   
+                             
+                             //verificar obrigatoria
+                             if(obrigBct.isSelected()) 
+                            	 bufferedWriter.write("SIM" + ";"+"-"+";"+"-"+";");                            	 
+                             else if(obrigBcc.isSelected())
+                                 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
+                             else
+                                 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");                            	 
+                            
+                             //verificar limitada
+                             if(limBct.isSelected()) 
+                            	 bufferedWriter.write("SIM" + ";"+"-"+";"+"-"+";");                             	 
+                             else if(limBcc.isSelected())
+                            	 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
+                             else
+                            	 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");  
+                            
+                             //verificar livre
+                             if(livreBct.isSelected()) 
+                            	 bufferedWriter.write("SIM" + ";"+"-"+";"+"-"+";");                            	 
+                             if(livreBcc.isSelected())
+                            	 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
+                             else
+                            	 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");  
+                             
+                             
+                             bufferedWriter.newLine();
+                             bufferedWriter.close();
+                             JOptionPane.showMessageDialog(null, "Matéria adicionado com sucesso!");
+                         }
+                         catch(IOException ex) {
+                             System.out.println( "Error writing to file '" + fileName + "'");
+                         }
                         
                         // passar dados ao menu !
                         
