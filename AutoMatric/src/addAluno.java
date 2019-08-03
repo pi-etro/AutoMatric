@@ -239,22 +239,6 @@ public class addAluno extends JDialog {
                                  JOptionPane.showMessageDialog(null, "CP do curso 3 está faltando!");
                              }
                              else {
-//                                 BufferedWriter escr = new BufferedWriter(new FileWriter(menu.getCsvAluno(), true));
-//                                 escr.write(ra.getText() + ";");
-//                                 escr.write(cr.getText() + ";");
-//                                 escr.write(turnoBox.getSelectedItem().toString() + ";");
-//                                 escr.write(biBox.getSelectedItem().toString() + ";");
-//                                 if(simbirb.isSelected()) escr.write("true;");
-//                                 else escr.write("false;");
-//                                 escr.write(curso1Box.getSelectedItem().toString() + ";");
-//                                 escr.write(CP1.getText() + ";");
-//                                 escr.write(curso2Box.getSelectedItem().toString() + ";");
-//                                 escr.write(CP2.getText() + ";");
-//                                 escr.write(curso3Box.getSelectedItem().toString() + ";");
-//                                 escr.write(CP3.getText() + ";");
-//                                 escr.newLine();
-//                                 escr.close();
-                                 
                                  String[] aluno = new String[11];
                                  aluno[0] = ra.getText();
                                  aluno[1] = cr.getText();
