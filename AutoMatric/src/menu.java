@@ -20,6 +20,7 @@ public class menu extends JFrame {
     private static String csvOferta;
     private static String csvMaterias;
     private static String csvMatriculados;
+    private static String csvSaveFiles;
     
     public menu() {
         setResizable(false);
@@ -121,4 +122,11 @@ public class menu extends JFrame {
     public static String getCsvMatriculados() {
         return csvMatriculados;
     }
+    public static void setCsvSaveFile(String adrss) {
+		csvSaveFiles = adrss;
+	}
+
+	public static String getCsvSaveFile() {
+		return csvSaveFiles;
+	}
 }

@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.DropMode;
 
 public class selArch extends JDialog {
     private static final long serialVersionUID = 1L;
@@ -28,6 +29,7 @@ public class selArch extends JDialog {
     public selArch() {
         setTitle("Selecionar Arquivos");
         setResizable(false);
+        setDragable(true);
         setForeground(Color.LIGHT_GRAY);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setBackground(Color.DARK_GRAY);
@@ -56,16 +58,16 @@ public class selArch extends JDialog {
         JButton btnStud = new JButton("...");
         btnStud.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-              JFileChooser file = new JFileChooser();
+              JFileChooser fileStud = new JFileChooser();
               String[] csv = {"csv"};
-              FileFilter filtro = new FileNameExtensionFilter("CSV file", csv);
-              file.setFileFilter(filtro);
-              file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-              int i= file.showSaveDialog(null);
+              FileFilter filtStud = new FileNameExtensionFilter("CSV file", csv);
+              fileStud.setFileFilter(filtStud);
+              fileStud.setFileSelectionMode(JFileChooser.FILES_ONLY);
+              int i= fileStud.showSaveDialog(null);		
               if (i!=1){
-                  File arquivo = file.getSelectedFile();
-                  alunoFile.setText(arquivo.getPath());
-              }
+                  File arquivo = fileStud.getSelectedFile();
+                  alunoFile.setText(arquivo.getPath());        
+            }
             }
         });
         btnStud.setBounds(330, 50, 30, 25);
@@ -74,14 +76,14 @@ public class selArch extends JDialog {
         JButton btnSub = new JButton("...");
         btnSub.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                JFileChooser file = new JFileChooser();
+                JFileChooser fileSub = new JFileChooser();
                 String[] csv = {"csv"};
-                FileFilter filtro = new FileNameExtensionFilter("CSV file", csv);
-                file.setFileFilter(filtro);
-                file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int i= file.showSaveDialog(null);
+                FileFilter filtrSub = new FileNameExtensionFilter("CSV file", csv);
+                fileSub.setFileFilter(filtrSub);
+                fileSub.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int i= fileSub.showSaveDialog(null);		
                 if (i!=1){
-                    materiasFile.setText(file.getSelectedFile().getPath());
+                    materiasFile.setText(fileSub.getSelectedFile().getPath());
                 }
             }
         });
@@ -93,10 +95,10 @@ public class selArch extends JDialog {
             public void actionPerformed(ActionEvent arg0) {
                 JFileChooser file = new JFileChooser();
                 String[] csv = {"csv"};
-                FileFilter filtro = new FileNameExtensionFilter("CSV file", csv);
-                file.setFileFilter(filtro);
+                FileFilter filtrOfer = new FileNameExtensionFilter("CSV file", csv);
+                file.setFileFilter(filtrOfer);
                 file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int i= file.showSaveDialog(null);
+                int i= file.showSaveDialog(null);		
                 if (i!=1){
                     ofertaFile.setText(file.getSelectedFile().getPath());
                 }
@@ -113,7 +115,7 @@ public class selArch extends JDialog {
                 FileFilter filtro = new FileNameExtensionFilter("CSV file", csv);
                 file.setFileFilter(filtro);
                 file.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int i= file.showSaveDialog(null);
+                int i= file.showSaveDialog(null);		
                 if (i!=1){
                     matriculaFile.setText(file.getSelectedFile().getPath());
                 }
@@ -138,6 +140,7 @@ public class selArch extends JDialog {
         alunoFile.setColumns(10);
         
         materiasFile = new JTextField();
+        materiasFile.setDropMode(DropMode.INSERT);
         materiasFile.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
                 if(materiasFile.getText().equals("Digite aqui...")) materiasFile.setText(""); 
@@ -146,13 +149,14 @@ public class selArch extends JDialog {
                 if(materiasFile.getText().equals("")) materiasFile.setText("Digite aqui...");
             }
         });
-        if(menu.getCsvAluno() != null) materiasFile.setText(menu.getCsvAluno());
+        if(menu.getCsvMaterias() != null) materiasFile.setText(menu.getCsvMaterias());
         else materiasFile.setText("Digite aqui...");
         materiasFile.setBounds(40, 110, 290, 25);
         contentPanel.add(materiasFile);
         materiasFile.setColumns(10);
         
         ofertaFile = new JTextField();
+        //apagar e voltar o texto quando TextField for selecionado
         ofertaFile.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent e) {
                 if(ofertaFile.getText().equals("Digite aqui...")) ofertaFile.setText(""); 
@@ -161,26 +165,27 @@ public class selArch extends JDialog {
                 if(ofertaFile.getText().equals("")) ofertaFile.setText("Digite aqui...");
             }
         });
-        if(menu.getCsvAluno() != null) ofertaFile.setText(menu.getCsvAluno());
+        if(menu.getCsvOferta() != null) ofertaFile.setText(menu.getCsvOferta());
         else ofertaFile.setText("Digite aqui...");
         ofertaFile.setBounds(40, 170, 290, 25);
         contentPanel.add(ofertaFile);
         ofertaFile.setColumns(10);
 
         matriculaFile = new JTextField();
+        matriculaFile.setBounds(40, 230, 290, 25);
+        contentPanel.add(matriculaFile);
+        matriculaFile.setColumns(10);
         matriculaFile.addFocusListener(new FocusAdapter() {
-            public void focusGained(FocusEvent e) {
+        //apagar mensagem "Digite aqui..." quando caixa de texto for selecionada
+        	public void focusGained(FocusEvent e) {
                 if(matriculaFile.getText().equals("Digite aqui...")) matriculaFile.setText(""); 
             }
             public void focusLost(FocusEvent e) {
                 if(matriculaFile.getText().equals("")) matriculaFile.setText("Digite aqui...");
             }
         });
-        if(menu.getCsvAluno() != null) matriculaFile.setText(menu.getCsvAluno());
+        if(menu.getCsvMatriculados() != null) matriculaFile.setText(menu.getCsvMatriculados());
         else matriculaFile.setText("Digite aqui...");
-        matriculaFile.setBounds(40, 230, 290, 25);
-        contentPanel.add(matriculaFile);
-        matriculaFile.setColumns(10);
         
         // OK Cancel
         {
@@ -225,4 +230,9 @@ public class selArch extends JDialog {
         //centralizar
         setLocationRelativeTo(null);
     }
+
+	private void setDragable(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 }
