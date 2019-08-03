@@ -115,7 +115,7 @@ public class addAluno extends JDialog {
         biBox.setBounds(285, 70, 116, 22);
         contentPanel.add(biBox);
         
-        JLabel posbiLabel = new JLabel("P\u00F3s Bacharelado");
+        JLabel posbiLabel = new JLabel("Pos Bacharelado");
         posbiLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
         posbiLabel.setBounds(25, 144, 139, 16);
         contentPanel.add(posbiLabel);
@@ -221,22 +221,22 @@ public class addAluno extends JDialog {
                     public void actionPerformed(ActionEvent arg0) {
                          try {
                              if(ra.getText().equals("Digite aqui...")) {
-                                 JOptionPane.showMessageDialog(null, "RA não digitado!");
+                                 JOptionPane.showMessageDialog(null, "RA nao digitado!");
                              }
                              else if(cr.getText().equals("Digite aqui...")) {
-                                 JOptionPane.showMessageDialog(null, "CP não digitado!");
+                                 JOptionPane.showMessageDialog(null, "CP nao digitado!");
                              }
                              else if(!simbirb.isSelected() && !naobirb.isSelected()) {
                                  JOptionPane.showMessageDialog(null, "Aluno possui pos bacharelado?");
                              }
                              else if(!curso1Box.getSelectedItem().toString().equals("-") &&  CP1.getText().equals("Digite aqui...")) {
-                                 JOptionPane.showMessageDialog(null, "CP do curso 1 está faltando!");
+                                 JOptionPane.showMessageDialog(null, "CP do curso 1 esta faltando!");
                              }
                              else if(!curso2Box.getSelectedItem().toString().equals("-") &&  CP2.getText().equals("Digite aqui...")) {
-                                 JOptionPane.showMessageDialog(null, "CP do curso 2 está faltando!");
+                                 JOptionPane.showMessageDialog(null, "CP do curso 2 esta faltando!");
                              }
                              else if(!curso3Box.getSelectedItem().toString().equals("-") &&  CP3.getText().equals("Digite aqui...")) {
-                                 JOptionPane.showMessageDialog(null, "CP do curso 3 está faltando!");
+                                 JOptionPane.showMessageDialog(null, "CP do curso 3 esta faltando!");
                              }
                              else {
                                  String[] aluno = new String[11];
@@ -268,7 +268,7 @@ public class addAluno extends JDialog {
                              JOptionPane.showMessageDialog(null, "Erro na escrita do arquivo!");
                          }
                          catch(NullPointerException e) {
-                             JOptionPane.showMessageDialog(null, "Arquivo do Banco de Alunos não selecionado!");
+                             JOptionPane.showMessageDialog(null, "Arquivo do Banco de Alunos nao selecionado!");
                          }
                     }
                 });

@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -15,12 +14,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -30,11 +26,9 @@ public class addMateria extends JDialog {
     private final JPanel contentPanel = new JPanel();
     private JTextField codigo;
     private JTextField nome;
-    //private ButtonGroup obrigatorias = new ButtonGroup();
     private ButtonGroup colBcc = new ButtonGroup();
     private ButtonGroup colBct = new ButtonGroup();
     private ButtonGroup colInfo = new ButtonGroup();
-	private static String arquivo = "cadastroMaterias.csv";
 
     public addMateria() {
         setTitle("Adicionar materia");
@@ -48,16 +42,24 @@ public class addMateria extends JDialog {
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
         
-        JLabel materiaLabel = new JLabel("Mat\u00E9ria");
+        JLabel materiaLabel = new JLabel("Materia");
         materiaLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
         materiaLabel.setBounds(12, 13, 56, 16);
         contentPanel.add(materiaLabel);
         
-        JLabel codLabel = new JLabel("C\u00F3digo ");
+        JLabel codLabel = new JLabel("Codigo ");
         codLabel.setBounds(12, 42, 56, 16);
         contentPanel.add(codLabel);
         
         codigo = new JTextField();
+        codigo.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(codigo.getText().equals("Digite aqui...")) codigo.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(codigo.getText().equals("")) codigo.setText("Digite aqui...");
+            }
+        });
         codigo.setText("Digite aqui...");
         codigo.setBounds(80, 39, 80, 22);
         contentPanel.add(codigo);
@@ -68,12 +70,20 @@ public class addMateria extends JDialog {
         contentPanel.add(nomeLabel);
         
         nome = new JTextField();
+        nome.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(nome.getText().equals("Digite aqui...")) nome.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(nome.getText().equals("")) nome.setText("Digite aqui...");
+            }
+        });
         nome.setText("Digite aqui...");
         nome.setColumns(10);
         nome.setBounds(80, 71, 326, 22);
         contentPanel.add(nome);
         
-        JLabel obrigLabel = new JLabel("Obrigat\u00F3ria para");
+        JLabel obrigLabel = new JLabel("Obrigatoria para");
         obrigLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
         obrigLabel.setBounds(12, 115, 134, 16);
         contentPanel.add(obrigLabel);
@@ -134,64 +144,65 @@ public class addMateria extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                    	 String fileName = arquivo;    
                          try {
-                             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(arquivo, true));
-                             // Note that write() does not automatically
-                             // append a newline character.
+                             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(menu.getCsvMaterias(), true));
+                             
                              bufferedWriter.write(codigo.getText() + ";");
                              bufferedWriter.write(nome.getText() + ";");   
                              
-                             //verificar obrigatoria - selecionar apenas uma opção
+                             String[] opt = {"false","false","false"};
+                             
+                             //verificar obrigatoria - selecionar apenas uma opcao
                              if(!obrigBct.isSelected() && !obrigBcc.isSelected() && !obrigInfo.isSelected()) //nenhum selecionado
-                    			JOptionPane.showMessageDialog(null, "Selecione ao menos uma opção obrigatória!");
+                    			JOptionPane.showMessageDialog(null, "Selecione ao menos uma opcao obrigatoria!");
                              else {
-                             if(obrigBct.isSelected()) 
-                            	 bufferedWriter.write("SIM" + ";"+"-"+";"+"-"+";");                            	 
+                             if(obrigBct.isSelected())
+                            	 bufferedWriter.write("true" + ";"+"-"+";"+"-"+";");                            	 
                              else if(obrigBcc.isSelected())
-                                 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
+                                 bufferedWriter.write("-"+";"+"true"+";"+"-"+";");
                              else
-                                 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");
+                                 bufferedWriter.write("-"+";" +"-"+ ";" + "true"+";");
                              }
                             
-                             //verificar limitada - mais de uma possibilidade, mas excluir a escolha de limitada quando a mesma obrgatoria for selecionada
-                             if(!limBct.isSelected() && !limBcc.isSelected() && !limInfo.isSelected()) //nenhum selecionado
-                    			 bufferedWriter.write("-"+";" +"-"+ ";" + "-"+";"); 
-                             else {
-                             if(obrigBct.isSelected()) { 
-                            		 if(limBcc.isSelected() && limInfo.isSelected())
-                            	 bufferedWriter.write("-" + ";"+"SIM"+";"+"SIM"+";");  
-                            		 else if(limBcc.isSelected() || limInfo.isSelected()) { 
-                            			 if(limBcc.isSelected()) {
-                            				 bufferedWriter.write("-"+";"+"SIM"+";"+"-"+";");
-                            			 }else {
-                                        	 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";"); 
-                            			 }
-                            		 }  
-                             }
-                             if(obrigBcc.isSelected()) {
-                            	 if(limBct.isSelected() && limInfo.isSelected())
-                            		 bufferedWriter.write("SIM" + ";"+"-"+";"+"SIM"+";");
-                            	 else if(limBct.isSelected() || limInfo.isSelected()) {
-                            		 if(limBct.isSelected()) {
-                            			 bufferedWriter.write("SIM"+";"+"-"+";"+"-"+";");
-                            			 }else {
-                            				 bufferedWriter.write("-"+";" +"-"+ ";" + "SIM"+";");
-                            				 }
-                            		 } 
-                             } if(obrigInfo.isSelected()) {
-                            	 if(limBct.isSelected() && limBcc.isSelected())
-                            		 bufferedWriter.write("SIM" + ";"+"SIM"+";"+"-"+";");
-                            	 else if(limBct.isSelected() || limBcc.isSelected()) {
-                            		 if(limBct.isSelected()) {
-                            			 bufferedWriter.write("SIM"+";"+"-"+";"+"-"+";");
-                            			 }else {
-                            				 bufferedWriter.write("-"+";" +"SIM"+ ";" + "-"+";");
-                            				 }
-                            		 } 
-                             }
-                             }
-                            
+                             //verificar limitada - mais de uma possibilidade, mas excluir a escolha de limitada quando a mesma obrigatoria for selecionada
+                            if (!limBct.isSelected() && !limBcc.isSelected() && !limInfo.isSelected()) // nenhum selecionado
+                                bufferedWriter.write("-" + ";" + "-" + ";" + "-" + ";");
+                            else {
+                                if (obrigBct.isSelected()) {
+                                    if (limBcc.isSelected() && limInfo.isSelected())
+                                        bufferedWriter.write("-" + ";" + "SIM" + ";" + "SIM" + ";");
+                                    else if (limBcc.isSelected() || limInfo.isSelected()) {
+                                        if (limBcc.isSelected()) {
+                                            bufferedWriter.write("-" + ";" + "SIM" + ";" + "-" + ";");
+                                        } else {
+                                            bufferedWriter.write("-" + ";" + "-" + ";" + "SIM" + ";");
+                                        }
+                                    }
+                                }
+                                if (obrigBcc.isSelected()) {
+                                    if (limBct.isSelected() && limInfo.isSelected())
+                                        bufferedWriter.write("SIM" + ";" + "-" + ";" + "SIM" + ";");
+                                    else if (limBct.isSelected() || limInfo.isSelected()) {
+                                        if (limBct.isSelected()) {
+                                            bufferedWriter.write("SIM" + ";" + "-" + ";" + "-" + ";");
+                                        } else {
+                                            bufferedWriter.write("-" + ";" + "-" + ";" + "SIM" + ";");
+                                        }
+                                    }
+                                }
+                                if (obrigInfo.isSelected()) {
+                                    if (limBct.isSelected() && limBcc.isSelected())
+                                        bufferedWriter.write("SIM" + ";" + "SIM" + ";" + "-" + ";");
+                                    else if (limBct.isSelected() || limBcc.isSelected()) {
+                                        if (limBct.isSelected()) {
+                                            bufferedWriter.write("SIM" + ";" + "-" + ";" + "-" + ";");
+                                        } else {
+                                            bufferedWriter.write("-" + ";" + "SIM" + ";" + "-" + ";");
+                                        }
+                                    }
+                                }
+                            }
+
                            //verificar livre - mais de uma possibilidade, mas excluir a escolha de livre quando a mesma obrigatoria OU limitada for selecionada
                              if(!livreBct.isSelected() && !livreBcc.isSelected() && !livreInfo.isSelected()) //nenhum selecionado
                     			 bufferedWriter.write("-"+";" +"-"+ ";" + "-"+";"); 
@@ -237,10 +248,10 @@ public class addMateria extends JDialog {
                              
                              bufferedWriter.newLine();
                              bufferedWriter.close();
-                             JOptionPane.showMessageDialog(null, "Matéria adicionado com sucesso!");
+                             JOptionPane.showMessageDialog(null, "Matï¿½ria adicionado com sucesso!");
                          }
                          catch(IOException ex) {
-                             System.out.println( "Error writing to file '" + fileName + "'");
+                             System.out.println( "Error writing to file");
                          }
                         
                         // passar dados ao menu !
@@ -265,7 +276,7 @@ public class addMateria extends JDialog {
                 buttonPane.add(cancelButton);
             }
             
-            //selecionar apenas uma opção nas colunas
+            //selecionar apenas uma opï¿½ï¿½o nas colunas
             colBct.add(obrigBct);
             colBct.add(limBct);
             colBct.add(livreBct);
