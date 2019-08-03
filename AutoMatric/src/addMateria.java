@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -10,17 +11,22 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
 
 public class addMateria extends JDialog {
     private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
     private JTextField codigo;
     private JTextField nome;
+    private ButtonGroup obrigatorias = new ButtonGroup();
+    private ButtonGroup limitadas = new ButtonGroup();
+    private ButtonGroup livres = new ButtonGroup();
 
     public addMateria() {
         setTitle("Adicionar materia");
@@ -91,41 +97,42 @@ public class addMateria extends JDialog {
         livreLabel.setBounds(12, 199, 134, 16);
         contentPanel.add(livreLabel);
         
-        JCheckBox obgBct = new JCheckBox("BCT");
-        obgBct.setBounds(134, 111, 56, 25);
-        contentPanel.add(obgBct);
+        JRadioButton obrigBct = new JRadioButton("BCT");
+        obrigBct.setBounds(134, 111, 56, 24);
+        contentPanel.add(obrigBct);
         
-        JCheckBox obgBcc = new JCheckBox("BCC");
-        obgBcc.setBounds(194, 111, 56, 25);
-        contentPanel.add(obgBcc);
+        JRadioButton obrigBcc = new JRadioButton("BCC");
+        obrigBcc.setBounds(194, 111, 56, 24);
+        contentPanel.add(obrigBcc);
         
-        JCheckBox obgInfo = new JCheckBox("INFO");
-        obgInfo.setBounds(254, 111, 56, 25);
-        contentPanel.add(obgInfo);
+        JRadioButton obrigInfo = new JRadioButton("INFO");
+        obrigInfo.setBounds(254, 111, 56, 24);
+        contentPanel.add(obrigInfo);
         
-        JCheckBox limBct = new JCheckBox("BCT");
-        limBct.setBounds(134, 153, 56, 25);
+        JRadioButton limBct = new JRadioButton("BCT");
+        limBct.setBounds(134, 153, 56, 24);
         contentPanel.add(limBct);
         
-        JCheckBox limBcc = new JCheckBox("BCC");
-        limBcc.setBounds(194, 153, 56, 25);
+        JRadioButton limBcc = new JRadioButton("BCC");
+        limBcc.setBounds(194, 153, 56, 24);
         contentPanel.add(limBcc);
         
-        JCheckBox limInfo = new JCheckBox("INFO");
-        limInfo.setBounds(254, 153, 56, 25);
+        JRadioButton limInfo = new JRadioButton("INFO");
+        limInfo.setBounds(254, 153, 56, 24);
         contentPanel.add(limInfo);
         
-        JCheckBox livreBct = new JCheckBox("BCT");
-        livreBct.setBounds(134, 195, 56, 25);
+        JRadioButton livreBct = new JRadioButton("BCT");
+        livreBct.setBounds(134, 195, 56, 24);
         contentPanel.add(livreBct);
         
-        JCheckBox livreBcc = new JCheckBox("BCC");
-        livreBcc.setBounds(194, 195, 56, 25);
+        JRadioButton livreBcc = new JRadioButton("BCC");
+        livreBcc.setBounds(194, 195, 56, 24);
         contentPanel.add(livreBcc);
         
-        JCheckBox livreInfo = new JCheckBox("INFO");
-        livreInfo.setBounds(254, 195, 56, 25);
+        JRadioButton livreInfo = new JRadioButton("INFO");
+        livreInfo.setBounds(254, 195, 56, 24);
         contentPanel.add(livreInfo);
+       
         
         // OK Cancel
         {
@@ -158,6 +165,19 @@ public class addMateria extends JDialog {
                 cancelButton.setActionCommand("Cancel");
                 buttonPane.add(cancelButton);
             }
+            
+            //adicionar ao ButtonList obrigatoria os radioButton respectivos           
+            obrigatorias.add(obrigBct);            
+            obrigatorias.add(obrigBcc);           
+            obrigatorias.add(obrigInfo);
+          //adicionar ao ButtonList limitada os radioButton respectivos
+            limitadas.add(limBct);            
+            limitadas.add(limBcc);           
+            limitadas.add(limInfo);
+          //adicionar ao ButtonList livres os radioButton respectivos
+            livres.add(livreBct);            
+            livres.add(livreBcc);           
+            livres.add(livreInfo);
         }
         
         //icone do programa
