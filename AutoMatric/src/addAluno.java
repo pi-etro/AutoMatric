@@ -219,7 +219,6 @@ public class addAluno extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                         try {
                              if(ra.getText().equals("Digite aqui...")) {
                                  JOptionPane.showMessageDialog(null, "RA nao digitado!");
                              }
@@ -239,37 +238,38 @@ public class addAluno extends JDialog {
                                  JOptionPane.showMessageDialog(null, "CP do curso 3 esta faltando!");
                              }
                              else {
-                                 String[] aluno = new String[11];
-                                 aluno[0] = ra.getText();
-                                 aluno[1] = cr.getText();
-                                 aluno[2] = turnoBox.getSelectedItem().toString();
-                                 aluno[3] = biBox.getSelectedItem().toString();
-                                 if(simbirb.isSelected()) aluno[4] = "true";
-                                 else aluno[4] = "false";
-                                 aluno[5] = curso1Box.getSelectedItem().toString();
-                                 if(aluno[5].equals("-")) aluno[6] = "0";
-                                 else aluno[6] = CP1.getText();;
-                                 aluno[7] = curso1Box.getSelectedItem().toString();
-                                 if(aluno[7].equals("-")) aluno[8] = "0";
-                                 else aluno[8] = CP2.getText();
-                                 aluno[9] = curso1Box.getSelectedItem().toString();
-                                 if(aluno[9].equals("-")) aluno[10] = "0";
-                                 else aluno[10] = CP3.getText();;
-                                 
-                                 CSVWriter escr = new CSVWriter(new FileWriter(menu.getCsvAluno(), true));
-                                 escr.writeNext(aluno);
-                                 escr.close();
-                                 JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
-                                 new menu().setVisible(true);
-                                 dispose();
+                                 try {
+                                     String[] aluno = new String[11];
+                                     aluno[0] = ra.getText();
+                                     aluno[1] = cr.getText();
+                                     aluno[2] = turnoBox.getSelectedItem().toString();
+                                     aluno[3] = biBox.getSelectedItem().toString();
+                                     if(simbirb.isSelected()) aluno[4] = "true";
+                                     else aluno[4] = "false";
+                                     aluno[5] = curso1Box.getSelectedItem().toString();
+                                     if(aluno[5].equals("-")) aluno[6] = "0";
+                                     else aluno[6] = CP1.getText();;
+                                     aluno[7] = curso1Box.getSelectedItem().toString();
+                                     if(aluno[7].equals("-")) aluno[8] = "0";
+                                     else aluno[8] = CP2.getText();
+                                     aluno[9] = curso1Box.getSelectedItem().toString();
+                                     if(aluno[9].equals("-")) aluno[10] = "0";
+                                     else aluno[10] = CP3.getText();;
+                                     
+                                     CSVWriter escr = new CSVWriter(new FileWriter(menu.getCsvAluno(), true), ';');
+                                     escr.writeNext(aluno);
+                                     escr.close();
+                                     JOptionPane.showMessageDialog(null, "Aluno adicionado com sucesso!");
+                                     new menu().setVisible(true);
+                                     dispose();
+                                 }
+                                 catch(IOException ex) {
+                                     JOptionPane.showMessageDialog(null, "Erro na escrita do arquivo!");
+                                 }
+                                 catch(NullPointerException e) {
+                                     JOptionPane.showMessageDialog(null, "Arquivo do Banco de Alunos nao selecionado!");
+                                 }
                              }
-                         }
-                         catch(IOException ex) {
-                             JOptionPane.showMessageDialog(null, "Erro na escrita do arquivo!");
-                         }
-                         catch(NullPointerException e) {
-                             JOptionPane.showMessageDialog(null, "Arquivo do Banco de Alunos nao selecionado!");
-                         }
                     }
                 });
                 okButton.setActionCommand("OK");
