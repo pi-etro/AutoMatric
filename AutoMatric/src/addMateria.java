@@ -29,6 +29,7 @@ public class addMateria extends JDialog {
     private JTextField codigo;
     private JTextField nome;
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public addMateria() {
         setTitle("Adicionar materia");
         setResizable(false);
@@ -126,6 +127,7 @@ public class addMateria extends JDialog {
             {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
+                    @SuppressWarnings("deprecation")
                     public void actionPerformed(ActionEvent arg0) {
                         if(bctBox.getSelectedItem().toString().equals("-") || bccBox.getSelectedItem().toString().equals("-")|| infoBox.getSelectedItem().toString().equals("-")) {
                             JOptionPane.showMessageDialog(null, "Indique a relacao da materia com todos os cursos!");

@@ -3,7 +3,15 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,8 +22,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import com.opencsv.*;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import sistema.*;
+import com.opencsv.CSVReader;
 
 public class classificar extends JDialog {
     private static final long serialVersionUID = 1L;
@@ -69,9 +80,17 @@ public class classificar extends JDialog {
         dirsalvar = new JTextField();
         dirsalvar.setBounds(40, 50, 290, 25);
         contentPanel.add(dirsalvar);
-        dirsalvar.setColumns(10);       
+        dirsalvar.setColumns(10);
+        dirsalvar.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent e) {
+                if(dirsalvar.getText().equals("Escolha o local...")) dirsalvar.setText(""); 
+            }
+            public void focusLost(FocusEvent e) {
+                if(dirsalvar.getText().equals("")) dirsalvar.setText("Escolha o local...");
+            }
+        });
         if(menu.getCsvSaveFile() != null) dirsalvar.setText(menu.getCsvSaveFile());
-        else dirsalvar.setText("Esolha o arquivo...");
+        else dirsalvar.setText("Escolha o local...");
         
         txtStatus = new JTextField();
         txtStatus.setEnabled(false);
@@ -92,7 +111,71 @@ public class classificar extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                    	menu.setCsvSaveFile(dirsalvar.getText());                     
+                        
+                        try (FileReader leitor = new FileReader(menu.getCsvOferta());) { 
+                            CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
+                            CSVReader csvLeitor = new CSVReaderBuilder(leitor).withCSVParser(parser).build();
+                            String[] t;
+                            //while de leitura de turmas, linha por linha ate acabar
+                            while ((t = csvLeitor.readNext()) != null) { 
+                                //[0] Materia, [1] Codig Disc, [2] Codig Turm, [3] Turma, [4] Turno, [5] Campus, [6] Vagas
+                                Turma turma = new Turma(t[0], t[1], t[2], t[4], t[6]);
+                                
+                                //lista com ras dos matriculados na turma que está sendo analisada
+                                List<Integer> raMatriculados = new ArrayList<>();
+                                try(FileReader l = new FileReader(menu.getCsvMatriculados());){
+                                    CSVReader csvL = new CSVReaderBuilder(leitor).withCSVParser(parser).build();
+                                    String[] mat;
+                                    while ((mat = csvL.readNext()) != null) {
+                                        if(mat[1].equals(turma.getCodTurma())) raMatriculados.add(Integer.parseInt(mat[0])); 
+                                    }
+                                }
+                                
+                                //lista com os objetos alunos matriculados
+                                List<Aluno> matriculados = new ArrayList<>();
+                                try(FileReader l = new FileReader(menu.getCsvAluno());){
+                                    CSVReader csvL = new CSVReaderBuilder(leitor).withCSVParser(parser).build();
+                                    String[] alu;
+                                    int i=0, a;
+                                    while ((alu = csvL.readNext()) != null || i < raMatriculados.size()) {
+                                        a = Integer.parseInt(alu[0]);
+                                        if(a == raMatriculados.get(i)) {
+                                             matriculados.add(new Aluno(alu[0], alu[1], alu[2], alu[3], alu[4], alu[5], alu[6], alu[7], alu[8], alu[9], alu[10]));
+                                        }
+                                    }
+                                }
+                                
+                                //gerar uma lista com a relação da materia atual com os cursos
+                                try(FileReader l = new FileReader(menu.getCsvMaterias());){
+                                    CSVReader csvL = new CSVReaderBuilder(leitor).withCSVParser(parser).build();
+                                    String[] materia;
+                                    while((materia = csvL.readNext()) != null){
+                                        if(materia[0].equals(turma.getCodDis())) {
+                                            String[] v = new String[materia.length-2];
+                                            for(int i=2; i<materia.length; i++) v[0] = materia[i]; 
+                                            ((Materia) turma).setRelacaoCurso(v);
+                                            break;
+                                        }
+                                    }
+                                }
+                                
+                                
+                                //inicio da classificação
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            }
+                        } catch (FileNotFoundException e) {
+                            
+                        } catch (IOException e) {
+                            
+                        }
+                        
+                        menu.setCsvSaveFile(dirsalvar.getText());                     
                         new menu().setVisible(true);
                         dispose();
                     }

@@ -4,7 +4,6 @@ import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -37,10 +36,8 @@ public class addAluno extends JDialog {
     private JTextField CP3;
     private ButtonGroup posBI = new ButtonGroup();
 
+    @SuppressWarnings({"rawtypes", "unchecked" })
     public addAluno() {
-        ArrayList agenda = new ArrayList();
-        agenda.add("a");
-        agenda.add("b");
         setTitle("Adicionar Aluno");
         setResizable(false);
         setForeground(Color.LIGHT_GRAY);
@@ -218,6 +215,7 @@ public class addAluno extends JDialog {
             {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
+                    @SuppressWarnings("deprecation")
                     public void actionPerformed(ActionEvent arg0) {
                              if(ra.getText().equals("Digite aqui...")) {
                                  JOptionPane.showMessageDialog(null, "RA nao digitado!");
