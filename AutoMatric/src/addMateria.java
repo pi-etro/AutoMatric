@@ -140,12 +140,12 @@ public class addMateria extends JDialog {
                         }
                         else {
                              try {
-                                 String[] materia = new String[11];
+                                 String[] materia = new String[5];
                                  materia[0] = codigo.getText();
                                  materia[1] = nome.getText();
                                  materia[2] = bctBox.getSelectedItem().toString();
                                  materia[3] = bccBox.getSelectedItem().toString();
-                                 materia[2] = infoBox.getSelectedItem().toString();
+                                 materia[4] = infoBox.getSelectedItem().toString();
                                  
                                  CSVWriter escr = new CSVWriter(new FileWriter(menu.getCsvMaterias(), true), ';');
                                  escr.writeNext(materia);

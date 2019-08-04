@@ -4,21 +4,6 @@ public class Aluno {
 	private int ra;
 	private double cr, cp1, cp2, cp3;
 	private String turno, bi, pbi, op1, op2, op3;
-    
-//	//construtor com os valores direto
-//	public Aluno(int ra, double cr, String turno, String bi, String pbi, String op1, double cp1, String op2, double cp2, String op3, double cp3) {
-//	    this.ra = ra;
-//	    this.cr = cr;
-//	    this.turno = turno;
-//	    this.bi = bi;
-//	    this.pbi = pbi;
-//	    this.op1 = op1;
-//	    this.cp1 = cp1;
-//	    this.op2 = op2;
-//	    this.cp2 = cp2;
-//	    this.op3 = op3;
-//	    this.cp3 = cp3;
-//	}
 	
 	//construtores com conversao de string, util para o opencsv
 	public Aluno(String ra, String cr, String turno, String bi, String pbi, String op1, String cp1, String op2, String cp2, String op3, String cp3) {

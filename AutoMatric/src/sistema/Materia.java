@@ -1,6 +1,6 @@
 package sistema;
 
-public abstract class Materia {
+public abstract class Materia implements Classificar{
     private String nomeDis;
     private String codDis;
     private String[][] relacaoCurso = {{"Bct","Bcc","Info"},{"","",""}};
