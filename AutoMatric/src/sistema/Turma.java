@@ -7,7 +7,14 @@ public class Turma extends Materia implements Classificar{
         super(nomeDis, codDis);
         this.turno = turno;
         this.codTurma = codTurma;
-        this.vagas = Integer.parseInt(vagas);
+        this.vagas = (Integer.parseInt(vagas.trim()));
+    }
+    
+    public Turma(String nomeDis, String codDis, String codTurma, String turno, int vagas) {
+        super(nomeDis, codDis);
+        this.turno = turno;
+        this.codTurma = codTurma;
+        this.vagas = vagas;
     }
 
     public String getTurno() {

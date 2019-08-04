@@ -22,17 +22,17 @@ public class Aluno {
 	
 	//construtores com conversao de string, util para o opencsv
 	public Aluno(String ra, String cr, String turno, String bi, String pbi, String op1, String cp1, String op2, String cp2, String op3, String cp3) {
-        this.ra = Integer.parseInt(ra);
-        this.cr = Double.parseDouble(cr);
+        this.ra = Integer.parseInt(ra.trim());
+        this.cr = Double.parseDouble(cr.trim());
         this.turno = turno;
         this.bi = bi;
         this.pbi = pbi;
         this.op1 = op1;
-        this.cp1 = Double.parseDouble(cp1);
+        this.cp1 = Double.parseDouble(cp1.trim());
         this.op2 = op2;
-        this.cp2 = Double.parseDouble(cp2);
+        this.cp2 = Double.parseDouble(cp2.trim());
         this.op3 = op3;
-        this.cp3 = Double.parseDouble(cp3);
+        this.cp3 = Double.parseDouble(cp3.trim());
     }
 	
 	//getters e setters
