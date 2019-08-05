@@ -11,6 +11,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -196,10 +197,24 @@ public class selArch extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                        menu.setCsvAluno(alunoFile.getText());
-                        menu.setCsvMaterias(materiasFile.getText());
-                        menu.setCsvOferta(ofertaFile.getText());
-                        menu.setCsvMatriculados(matriculaFile.getText());
+                        if(alunoFile.getText().equals("Digite aqui...")) {
+                            JOptionPane.showMessageDialog(null, "Adicione o Bando de Alunos!");
+                        }
+                        else if(materiasFile.getText().equals("Digite aqui...")) {
+                            JOptionPane.showMessageDialog(null, "Adicione o Bando de Materias!");
+                        }
+                        else if(ofertaFile.getText().equals("Digite aqui...")) {
+                            JOptionPane.showMessageDialog(null, "Adicione o Bando de Materias Ofertadas!");
+                        }
+                        else if(matriculaFile.getText().equals("Digite aqui...")) {
+                            JOptionPane.showMessageDialog(null, "Adicione o Bando de Matriculados!");
+                        }
+                        else {                        
+                            menu.setCsvAluno(alunoFile.getText());
+                            menu.setCsvMaterias(materiasFile.getText());
+                            menu.setCsvOferta(ofertaFile.getText());
+                            menu.setCsvMatriculados(matriculaFile.getText());
+                        }
                         new menu().setVisible(true);
                         dispose();
                     }

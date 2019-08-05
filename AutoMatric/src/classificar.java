@@ -26,15 +26,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import com.opencsv.*;
-import javax.swing.SwingConstants;
-import java.awt.Font;
 import sistema.*;
 
 public class classificar extends JDialog {
     private static final long serialVersionUID = 1L;
     private final JPanel contentPanel = new JPanel();
     private JTextField dirsalvar;
-    private JTextField txtStatus;
 
     public classificar(){
         setTitle("Classificar");
@@ -47,15 +44,6 @@ public class classificar extends JDialog {
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
-        
-        JLabel statusLabel = new JLabel("Status...");
-        statusLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        statusLabel.setVerticalAlignment(SwingConstants.TOP);
-        statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        statusLabel.setBounds(40, 119, 410, 117);
-        contentPanel.add(statusLabel);
-        statusLabel.setForeground(Color.GREEN);
-        statusLabel.setVisible(true);
         
         JLabel salveremLabel = new JLabel("Salvar Arquivos em");
         salveremLabel.setBounds(40, 30, 290, 14);
@@ -93,16 +81,6 @@ public class classificar extends JDialog {
         if(menu.getCsvSaveFile() != null) dirsalvar.setText(menu.getCsvSaveFile());
         else dirsalvar.setText("Escolha o local...");
         
-        txtStatus = new JTextField();
-        txtStatus.setEnabled(false);
-        txtStatus.setEditable(false);
-        txtStatus.setForeground(Color.GREEN);
-        txtStatus.setBackground(Color.BLACK);
-        txtStatus.setHorizontalAlignment(SwingConstants.LEFT);
-        txtStatus.setBounds(30, 103, 420, 127);
-        contentPanel.add(txtStatus);
-        txtStatus.setColumns(10);
-        
         // OK Cancel
         {
             JPanel buttonPane = new JPanel();
@@ -113,6 +91,22 @@ public class classificar extends JDialog {
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
                         menu.setCsvSaveFile(dirsalvar.getText());
+                        if(menu.getCsvSaveFile()==null || menu.getCsvSaveFile().equals("Digite aqui...")) {
+                            JOptionPane.showMessageDialog(null, "Adicione um local para salvar!");
+                        }
+                        else if(menu.getCsvAluno() == null) {
+                            JOptionPane.showMessageDialog(null, "Adicione um Bando de Alunos!");
+                        }
+                        else if(menu.getCsvMaterias() == null) {
+                            JOptionPane.showMessageDialog(null, "Adicione um Bando de Materias!");
+                        }
+                        else if(menu.getCsvOferta() == null) {
+                            JOptionPane.showMessageDialog(null, "Adicione um Bando de Materias Ofertadas!");
+                        }
+                        else if(menu.getCsvMatriculados() == null) {
+                            JOptionPane.showMessageDialog(null, "Adicione um Bando de Matriculados!");
+                        }
+                        else {                        
                         try (FileReader leitor = new FileReader(menu.getCsvOferta());) {
                             //adicionar o cabeçalho
                             @SuppressWarnings("deprecation")
@@ -439,6 +433,7 @@ public class classificar extends JDialog {
                         JOptionPane.showMessageDialog(null, "Classificação feita com sucesso!");
                         new menu().setVisible(true);
                         dispose();
+                        }
                     }
                 });
                 okButton.setActionCommand("OK");
