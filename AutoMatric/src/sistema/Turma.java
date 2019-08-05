@@ -112,8 +112,7 @@ public class Turma extends Materia{
     }
     
     public boolean verificar150(int matriculasRecebidas){
-		double resultado = matriculasRecebidas/this.vagas;
-		System.out.println(resultado);
+		double resultado = ((double)matriculasRecebidas)/this.vagas;
 		if(resultado >=1.5)
 			return true;			
 		else
