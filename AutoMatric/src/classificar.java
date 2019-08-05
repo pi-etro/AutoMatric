@@ -112,10 +112,6 @@ public class classificar extends JDialog {
                 JButton okButton = new JButton("OK");
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
-                        menu.setCsvAluno("/home/pi/Documents/csvs/Alunos.csv");
-                        menu.setCsvMaterias("/home/pi/Documents/csvs/Materia.csv");
-                        menu.setCsvOferta("/home/pi/Documents/csvs/Ofertas.csv");
-                        menu.setCsvMatriculados("/home/pi/Documents/csvs/Matricula.csv");
                         menu.setCsvSaveFile(dirsalvar.getText());
                         try (FileReader leitor = new FileReader(menu.getCsvOferta());) {
                             //adicionar o cabeçalho
