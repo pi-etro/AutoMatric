@@ -111,8 +111,8 @@ public class classificar extends JDialog {
                             //adicionar o cabeçalho
                             @SuppressWarnings("deprecation")
                             CSVWriter escr = new CSVWriter(new FileWriter(menu.getCsvSaveFile(), true), ';');
-                            String[] alunoMat = new String[5];
-                            String[] header = {"RA", "Turma", "Matéria", "CR corte", "CP corte"};
+                            String[] alunoMat = new String[6];
+                            String[] header = {"RA", "Turma", "Matéria", "CR corte", "CP corte", "Alta Demanda"};
                             escr.writeNext(header);
 
                             //leitor do csv de materias ofertadas
@@ -405,8 +405,8 @@ public class classificar extends JDialog {
                                                 c++;
                                             }
                                         }
-                                        tipo = "cp";
                                     }
+                                    tipo="cp";
                                 }
                                 for(int i=0; i<matriculados.length && i<turma.getVagas(); i++) {
                                     selecionados[i] = matriculados[i];
@@ -417,10 +417,12 @@ public class classificar extends JDialog {
                                     alunoMat[0] = String.valueOf(selecionados[i].getRa());
                                     alunoMat[1] = turma.getCodTurma();
                                     alunoMat[2] = turma.getNomeDis();
-                                    if (tipo.equals("cr") && i==selecionados.length-1) alunoMat[3] = String.format("%.2f", selecionados[i].getCr());
+                                    if (tipo.equals("cr")) alunoMat[3] = String.format("%.2f", selecionados[selecionados.length-1].getCr());
                                     else alunoMat[3] = "-";
-                                    if (tipo.equals("cp") && i==selecionados.length-1) alunoMat[4] = String.format("%.2f", Turma.maiorCp(selecionados[i]));
+                                    if (tipo.equals("cp")) alunoMat[4] = String.format("%.2f", Turma.maiorCp(selecionados[selecionados.length-1]));
                                     else alunoMat[4] = "-";
+                                    if(turma.verificar150(matriculados.length)) alunoMat[5] = "Alta Demanda";
+                                    else alunoMat[5] = "-";
                                     escr.writeNext(alunoMat);
                                 }
                             }

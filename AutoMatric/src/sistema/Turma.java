@@ -111,12 +111,12 @@ public class Turma extends Materia{
         return false;
     }
     
-//    protected boolean verificar150(int matriculasRecebidas, int vagas)
-//	{
-//		double resultado = matriculasRecebidas/vagas;
-//		if(resultado >=1.5)
-//			return true;			
-//		else
-//			return false;		
-//	}
+    public boolean verificar150(int matriculasRecebidas){
+		double resultado = matriculasRecebidas/this.vagas;
+		System.out.println(resultado);
+		if(resultado >=1.5)
+			return true;			
+		else
+			return false;		
+	}
 }
