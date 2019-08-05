@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -38,7 +39,6 @@ public class classificar extends JDialog {
     public classificar(){
         setTitle("Classificar");
         setResizable(false);
-        setDragable(true);
         setForeground(Color.LIGHT_GRAY);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setBackground(Color.DARK_GRAY);
@@ -117,7 +117,6 @@ public class classificar extends JDialog {
                         menu.setCsvOferta("/home/pi/Documents/csvs/Ofertas.csv");
                         menu.setCsvMatriculados("/home/pi/Documents/csvs/Matricula.csv");
                         menu.setCsvSaveFile(dirsalvar.getText());
-                        
                         try (FileReader leitor = new FileReader(menu.getCsvOferta());) {
                             //adicionar o cabeçalho
                             @SuppressWarnings("deprecation")
@@ -141,7 +140,6 @@ public class classificar extends JDialog {
                                 }
                                 String[] t = tur.split(";");
                                 Turma turma = new Turma(t[0], t[1], t[2], t[4], t[6]);
-                                System.out.println(t[1]);
 
                                 //lista com ras dos matriculados na turma que esta sendo analisada
                                 List<Integer> raMatriculados = new ArrayList<>();
@@ -163,24 +161,25 @@ public class classificar extends JDialog {
                                 
                                 //lista com os objetos Alunos matriculados
                                 Aluno[] matriculados = new Aluno[raMatriculados.size()];
-                                try(FileReader l = new FileReader(menu.getCsvAluno());){
-                                    BufferedReader csvL = new BufferedReader(l);
-                                    String row;
-                                    boolean bt = true;
-                                    int i=0, a;
-                                    while ((row = csvL.readLine()) != null && i < raMatriculados.size()) {
-                                        if(bt) {
-                                            bt=false;
-                                            continue;
+                                int p=0;
+                                while(p<raMatriculados.size()) {
+                                    try(FileReader l = new FileReader(menu.getCsvAluno());){
+                                        BufferedReader csvL = new BufferedReader(l);
+                                        String row;
+                                        boolean bt = true;
+                                        while ((row = csvL.readLine()) != null) {
+                                            if(bt) {
+                                                bt=false;
+                                                continue;
+                                            }
+                                            String[] alu = row.split(";");
+                                            Integer a = Integer.valueOf(alu[0]);
+                                            if(raMatriculados.get(p).equals(a)) {
+                                                matriculados[p] = new Aluno(alu[0], alu[1], alu[2], alu[3], alu[4], alu[5], alu[6], alu[7], alu[8], alu[9], alu[10]);
+                                            }
                                         }
-                                        System.out.println(row);
-                                        String[] alu = row.split(";");
-                                        a = Integer.parseInt(alu[0].trim());
-                                        if(a == raMatriculados.get(i)) {
-                                             matriculados[i] = new Aluno(alu[0], alu[1], alu[2], alu[3], alu[4], alu[5], alu[6], alu[7], alu[8], alu[9], alu[10]);
-                                        }
-                                        i++;
                                     }
+                                    p++;
                                 }
                                 
                                 //gerar uma lista com a relação da materia atual com os cursos
@@ -209,12 +208,7 @@ public class classificar extends JDialog {
                                 
                                 // variaveis para armazenas os selecionados e o valor do corte
                                 Aluno[] selecionados = new Aluno[turma.getVagas()];
-                                double corte = 0;
                                 String tipo = null;
-                                
-//                                for(int i=0; i<matriculados.length; i++) {
-//                                    System.out.println(matriculados[i]);
-//                                }
                                 
                                 //!!!!!!!!!!!!!!  INICIO DA CLASSIFICACAO  !!!!!!!!!!!!!!!!!!!!
 
@@ -427,29 +421,26 @@ public class classificar extends JDialog {
                                 for(int i=0; i<matriculados.length && i<turma.getVagas(); i++) {
                                     selecionados[i] = matriculados[i];
                                 }
-
+                                
                                 //escrita no arquivo
-                                for(int i=0; selecionados[i] != null && i<selecionados.length; i++) {
+                                for(int i=0; i<selecionados.length; i++) {
                                     alunoMat[0] = String.valueOf(selecionados[i].getRa());
                                     alunoMat[1] = turma.getCodTurma();
                                     alunoMat[2] = turma.getNomeDis();
-                                    if (tipo.equals("cr")) alunoMat[3] = String.format("%.2f", corte);
+                                    if (tipo.equals("cr") && i==selecionados.length-1) alunoMat[3] = String.format("%.2f", selecionados[i].getCr());
                                     else alunoMat[3] = "-";
-                                    if (tipo.equals("cp")) alunoMat[4] = String.format("%.2f", corte);
+                                    if (tipo.equals("cp") && i==selecionados.length-1) alunoMat[4] = String.format("%.2f", Turma.maiorCp(selecionados[i]));
                                     else alunoMat[4] = "-";
-                                    System.out.println(alunoMat[0]);
                                     escr.writeNext(alunoMat);
                                 }
                             }
                             escr.close();
                         } catch (FileNotFoundException e) {
-                            System.out.println("Erro1");
+                            JOptionPane.showMessageDialog(null, "Arquivo nao encontrado!");
                         } catch (IOException e) {
-                            System.out.println(e.toString());
-                            System.out.println("Erro2");
+                            JOptionPane.showMessageDialog(null, "Nao foi possivel abrir o arquivo!");
                         }
-                        
-                        menu.setCsvSaveFile(dirsalvar.getText());                     
+                        JOptionPane.showMessageDialog(null, "Classificação feita com sucesso!");
                         new menu().setVisible(true);
                         dispose();
                     }
@@ -470,7 +461,6 @@ public class classificar extends JDialog {
                 buttonPane.add(cancelButton);
             }
         }
-        
         try {
             super.setIconImage(ImageIO.read(new File("img/icon.png")));
         } catch (Exception e) {
@@ -478,11 +468,4 @@ public class classificar extends JDialog {
         }
         setLocationRelativeTo(null);
     }
-
-	private void setDragable(boolean b) {
-		
-	}
-
-
-	
 }
