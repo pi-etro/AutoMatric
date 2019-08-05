@@ -91,7 +91,7 @@ public class classificar extends JDialog {
                 okButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent arg0) {
                         menu.setCsvSaveFile(dirsalvar.getText());
-                        if(menu.getCsvSaveFile()==null || menu.getCsvSaveFile().equals("Digite aqui...")) {
+                        if(menu.getCsvSaveFile()==null || menu.getCsvSaveFile().equals("Escolha o local...")) {
                             JOptionPane.showMessageDialog(null, "Adicione um local para salvar!");
                         }
                         else if(menu.getCsvAluno() == null) {
