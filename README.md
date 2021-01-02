@@ -1,5 +1,3 @@
-# <img alt="AutoMatric logo" src="https://raw.githubusercontent.com/pi-etro/AutoMatric/master/img/lg_matric_gray.png" width="325">
-
 <p align="left">
     <img alt="AutoMatric logo" src="https://raw.githubusercontent.com/pi-etro/AutoMatric/master/img/lg_matric_gray.png" width="325">
 </p>
